@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Sapper files
+.DS_Store
+/node_modules/
+/src/node_modules/@sapper/
+/cypress/screenshots/
+/__sapper__/
