@@ -12,7 +12,7 @@
         container.style.height = `calc(98vh - ${top}px)`;
     });
 	
-function sortGames(by) {
+/*function sortGames(by) {
 	if (by == "A"){
 		games.title.sort();
 	}
@@ -26,7 +26,7 @@ function sortGames(by) {
 	if (by == "A"){
 		games.price.sort(function(a, b){return b - a});
 	}
-}
+}*/
 </script>
 
 <style>
@@ -41,12 +41,12 @@ function sortGames(by) {
 
 <h1 class="center">Browse Games</h1>
 
-<select id="sort">
+/*<select id="sort">
     <option value="A">A-Z</a>
 	//<option onclick="sortGames(Z)">Z-A</a>
 	//<option onclick="sortGames($)">$-$$$</a>
 	//<option onclick="sortGames($$$)">$$$-$</a>
-</select>
+</select>*/
 
 <div bind:this={container}>
     {#each games as game}
