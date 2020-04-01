@@ -36,7 +36,6 @@
         flex-wrap: wrap;
         overflow-y: scroll;
     }
-
 </style>
 
 <h1 class="center">Browse Games</h1>
