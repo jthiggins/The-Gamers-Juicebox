@@ -40,13 +40,13 @@
 
 <h1 class="center">Browse Games</h1>
 
-/*<select id="sort">
+<select id="sort">
     <option value="A">A-Z</a>
 	//<option onclick="sortGames(Z)">Z-A</a>
 	//<option onclick="sortGames($)">$-$$$</a>
 	//<option onclick="sortGames($$$)">$$$-$</a>
 </select>
-*/
+
 
 <div bind:this={container}>
     {#each games as game}
