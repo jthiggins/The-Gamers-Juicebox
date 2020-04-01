@@ -42,10 +42,10 @@ function sortGames(by) {
 <h1 class="center">Browse Games</h1>
 
 <select id="sort">
-    <option onclick="sortGames(A)">A-Z</a>
-	<option onclick="sortGames(Z)">Z-A</a>
-	<option onclick="sortGames($)">$-$$$</a>
-	<option onclick="sortGames($$$)">$$$-$</a>
+    <option value="A">A-Z</a>
+	//<option onclick="sortGames(Z)">Z-A</a>
+	//<option onclick="sortGames($)">$-$$$</a>
+	//<option onclick="sortGames($$$)">$$$-$</a>
 </select>
 
 <div bind:this={container}>
