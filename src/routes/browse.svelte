@@ -12,21 +12,49 @@
         container.style.height = `calc(98vh - ${top}px)`;
     });
 	
-/*function sortGames(by) {
-	if (by == "A"){
-		games.title.sort();
+	function compareValues(key, order = 'asc') {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      // property doesn't exist on either object
+      return 0;
+    }
+
+    const varA = (typeof a[key] === 'string')
+      ? a[key].toUpperCase() : a[key];
+    const varB = (typeof b[key] === 'string')
+      ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return (
+      (order === 'desc') ? (comparison * -1) : comparison
+    );
+  };
+}
+
+function sortGames(sortPick) {
+alert(sortPick);
+	if (sortPick == "0"){
+		games.sort(compareValues('title'));
+		alert("fuc");
 	}
-	if (by == "Z"){
-		games.title.sort();
-		games.title.reverse()
+	if (sortPick === "A"){
+		games.sort(compareValues('title'));
 	}
-	if (by == "A"){
-		games.price.sort(function(a, b){return a - b});
+	if (sortPick === "Z"){
+		games.sort(compareValues('title', 'desc'));
 	}
-	if (by == "A"){
-		games.price.sort(function(a, b){return b - a});
+	if (sortPick === "$"){
+		games.sort(compareValues('price'));
 	}
-}*/
+	if (sortPick === "$$$"){
+		games.sort(compareValues('price', desc));
+	}
+}
 </script>
 
 <style>
@@ -40,15 +68,16 @@
 
 <h1 class="center">Browse Games</h1>
 
-<select id="sort">
-    <option value="A">A-Z</a>
-	<option onclick="sortGames(Z)">Z-A</option>
-	<option onclick="sortGames($)">$-$$$</option>
-	<option onclick="sortGames($$$)">$$$-$</option>
+<select onChange="sortGames(this.value)" id="sortDrop">
+	<option value="0" selected>Sort...</option>
+    <option value="A">A-Z</option>
+	<option value="Z">Z-A</option>
+	<option value="$">$-$$$</option>
+	<option value="$$$">$$$-$</option>
 </select>
 
 
-<div bind:this={container}>
+<div id="display" bind:this={container}>
     {#each games as game}
     <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
     {/each}
