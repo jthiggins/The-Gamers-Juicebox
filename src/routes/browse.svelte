@@ -42,9 +42,9 @@
 
 <select id="sort">
     <option value="A">A-Z</a>
-	//<option onclick="sortGames(Z)">Z-A</a>
-	//<option onclick="sortGames($)">$-$$$</a>
-	//<option onclick="sortGames($$$)">$$$-$</a>
+	<option onclick="sortGames(Z)">Z-A</option>
+	<option onclick="sortGames($)">$-$$$</option>
+	<option onclick="sortGames($$$)">$$$-$</option>
 </select>
 
 
