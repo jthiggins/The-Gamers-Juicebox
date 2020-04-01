@@ -45,7 +45,8 @@
 	//<option onclick="sortGames(Z)">Z-A</a>
 	//<option onclick="sortGames($)">$-$$$</a>
 	//<option onclick="sortGames($$$)">$$$-$</a>
-</select>*/
+</select>
+*/
 
 <div bind:this={container}>
     {#each games as game}
