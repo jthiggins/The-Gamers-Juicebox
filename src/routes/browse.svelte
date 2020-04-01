@@ -100,15 +100,12 @@ function sortGames(by) {
 
 <h1 class="center">Browse Games</h1>
 
-<div class="dropdown">
-  <button onclick="drop()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a onclick="sortGames(A)">A-Z</a>
-	<a onclick="sortGames(Z)">Z-A</a>
-	<a onclick="sortGames($)">$-$$$</a>
-	<a onclick="sortGames($$$)">$$$-$</a>
-  </div>
-</div>
+<select id="sort">
+    <option onclick="sortGames(A)">A-Z</a>
+	<option onclick="sortGames(Z)">Z-A</a>
+	<option onclick="sortGames($)">$-$$$</a>
+	<option onclick="sortGames($$$)">$$$-$</a>
+</select>
 
 <div bind:this={container}>
     {#each games as game}
