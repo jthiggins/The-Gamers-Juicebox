@@ -6,6 +6,7 @@
     import { onMount } from 'svelte';
     import GameDisplay from '../components/GameDisplay.svelte';
     import games from './_games';
+	// import Select from './svelte-select'
     let container;
 
     onMount(() => {
@@ -13,35 +14,28 @@
         container.style.height = `calc(98vh - ${top}px)`;
     });
 	
-function drop() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+	/* const sortItems = [
+	{value: 'A', label: 'A-Z', group: 'Title'},
+    {value: 'Z', label: 'Z-A', group: 'Title'},
+    {value: '$', label: '$-$$$', group: 'Price'},
+    {value: '$$$', label: '$$$-$', group: 'Price'},
+	]; */
+	
+	let selectedValue = undefined;
 
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-function sortGames(by) {
-	if (by == "A"){
+if (selectedValue != undefined) {
+	if (selectedValue == "A"){
 		games.title.sort();
+		document.getElementById("display").reload();
 	}
-	if (by == "Z"){
+	if (selectedValue == "Z"){
 		games.title.sort();
 		games.title.reverse()
 	}
-	if (by == "A"){
+	if (selectedValue == "A"){
 		games.price.sort(function(a, b){return a - b});
 	}
-	if (by == "A"){
+	if (selectedValue == "A"){
 		games.price.sort(function(a, b){return b - a});
 	}
 }
@@ -55,21 +49,18 @@ function sortGames(by) {
         flex-wrap: wrap;
         overflow-y: scroll;
     }
+	
+
 </style>
 
 <h1 class="center">Browse Games</h1>
 
-<div class="dropdown">
-  <button onclick="drop()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a onclick="sortGames(A)">A-Z</a>
-	<a onclick="sortGames(Z)">Z-A</a>
-	<a onclick="sortGames($)">$-$$$</a>
-	<a onclick="sortGames($$$)">$$$-$</a>
-  </div>
+<div>
+	<h2>Sort</h2>
+	<Select {sortItems} bind:selectedValue></Select>
 </div>
 
-<div bind:this={container}>
+<div id="display" bind:this={container}>
     {#each games as game}
     <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
     {/each}
