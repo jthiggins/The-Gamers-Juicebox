@@ -3,7 +3,7 @@ const games = [
 		title: 'The Legend of Zelda',
 		description: 'Explore the world freely by collecting multipurpose items to aid in objectives or solving puzzles and side quests for rewards',
 		publisher: 'Nintendo',
-		platform: 'Nintendo Switch',
+		platforms: 'Nintendo Switch',
 		price: '59.99'
 	},
 
@@ -11,7 +11,7 @@ const games = [
 		title: 'Call of Duty',
 		description: 'Follow a CIA officer and British SAS forces as they team up with rebels from Urzikstan, against Russian forces who have invaded the country',
 		publisher: 'Activision',
-		platform: 'PlayStation',
+		platforms: 'PlayStation',
 		price: '59.99'
 	},
 
@@ -19,7 +19,7 @@ const games = [
 		title: 'Super Mario Odyssey',
 		description: 'Join Mario on a massive, globe-trotting 3D adventure',
 		publisher: 'Nintendo',
-		platform: 'Nintendo Switch',
+		platforms: 'Nintendo Switch',
 		price: '49.99'
 	},
 
@@ -27,7 +27,7 @@ const games = [
 		title: 'Fortnite',
 		description: 'The Agency is calling, will you join the fight?',
 		publisher: 'Epic Games',
-		platform: 'PlayStation',
+		platforms: 'PlayStation',
 		price: '58.99'
 	},
 
@@ -35,7 +35,7 @@ const games = [
 		title: 'FIFA 20',
 		description: 'Authentic soccer experience',
 		publisher: 'Electronic Arts',
-		platform: 'PlayStation',
+		platforms: 'PlayStation',
 		price: '39.99'
 	},
 
@@ -43,7 +43,7 @@ const games = [
 		title: 'Donkey Kong',
 		description: 'Arctic invaders have turned Donkey Kong Island into their personal frozen fortress, and it’s up to you to save the day',
 		publisher: 'Nintendo',
-		platform: 'Nintendo Switch',
+		platforms: 'Nintendo Switch',
 		price: '59.99'
 	},
 
@@ -51,7 +51,7 @@ const games = [
 		title: 'Minecraft',
 		description: 'Explore a blocky, procedurally-generated 3D world',
 		publisher: 'Mojang',
-		platform: 'XBox',
+		platforms: 'XBox',
 		price: '19.99'
 	},
 
@@ -59,13 +59,9 @@ const games = [
 		title: 'Grand Theft Auto V',
 		description: 'Follow criminals and their efforts to commit heists while under pressure from a government agency',
 		publisher: 'Rockstar Games',
-		platform: 'XBox',
+		platforms: 'XBox',
 		price: '9.99'
 	}
 ];
-
-games.forEach(game => {
-	game.html = game.html.replace(/^\t{5}/gm, '');
-});
 
 export default games;

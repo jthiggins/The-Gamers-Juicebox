@@ -7,6 +7,8 @@
     .game-container {
         border: 1px solid black;
         font-size: 16pt;
+        width: 400px;
+        padding: 5px;
     }
     .placeholder {
         width: 150px;
@@ -28,7 +30,7 @@
 {#if game}
 <div class="game-container" {style}>
     <img src={game.imgSrc} alt="Cover art of {game.title}"/>
-    <div>
+    <div style="margin-top: 10px">
         <strong>{game.title}</strong>
     </div>
     <div>

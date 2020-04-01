@@ -5,8 +5,7 @@
 <script>
     import { onMount } from 'svelte';
     import GameDisplay from '../components/GameDisplay.svelte';
-    // TODO: Get games
-    let games = Array(30);
+    import games from './_games';
     let container;
 
     onMount(() => {
