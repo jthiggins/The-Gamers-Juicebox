@@ -1,7 +1,0 @@
-node_modules
-.DS_Store
-.idea
-index.js
-index.mjs
-test/public/bundle.js
-!test/src/index.js
