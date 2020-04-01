@@ -6,6 +6,7 @@
     import { onMount } from 'svelte';
     import GameDisplay from '../components/GameDisplay.svelte';
     import games from './_games';
+	var gamesEdit = games;
     let container;
     onMount(() => {
         const { top } = container.getBoundingClientRect();
@@ -36,8 +37,9 @@
   };
 }
 
+
 function sortGames() {
-var gamesEdit = games;
+gamesEdit = games;
 var sortPick = document.getElementById("sortDrop").value;
 var plat = document.getElementById("platDrop").value;
 var price = document.getElementById("priceDrop").value;
@@ -53,7 +55,7 @@ var price = document.getElementById("priceDrop").value;
 		gamesEdit.sort(compareValues('price'));
 	}
 	if (sortPick === "$$$"){
-		gamesEdit.sort(compareValues('price', desc));
+		gamesEdit.sort(compareValues('price', 'desc'));
 	}
 	
 	if (plat != "0") {
@@ -75,7 +77,7 @@ var price = document.getElementById("priceDrop").value;
 		gamesEdit = priceFilt;
 	}
 	
-	alert(gamesEdit);
+	gamesEdit = gamesEdit;
 }
 </script>
 
@@ -90,7 +92,7 @@ var price = document.getElementById("priceDrop").value;
 
 <h1 class="center">Browse Games</h1>
 
-<div>
+<div> 
 <select id="sortDrop">
 	<option value="0" selected>Sort...</option>
     <option value="A">A-Z</option>
@@ -115,7 +117,7 @@ var price = document.getElementById("priceDrop").value;
 
 
 <div id="display" bind:this={container}>
-    {#each games as game}
+    {#each gamesEdit as game}
     <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
     {/each}
 </div>
