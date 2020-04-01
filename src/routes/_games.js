@@ -4,7 +4,7 @@ const games = [
 		description: 'Explore the world freely by collecting multipurpose items to aid in objectives or solving puzzles and side quests for rewards',
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
-		price: '59.99'
+		price: 59.99
 	},
 
 	{
@@ -12,7 +12,7 @@ const games = [
 		description: 'Follow a CIA officer and British SAS forces as they team up with rebels from Urzikstan, against Russian forces who have invaded the country',
 		publisher: 'Activision',
 		platforms: 'PlayStation',
-		price: '59.99'
+		price: 59.99
 	},
 
 	{
@@ -20,7 +20,7 @@ const games = [
 		description: 'Join Mario on a massive, globe-trotting 3D adventure',
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
-		price: '49.99'
+		price: 49.99
 	},
 
 	{
@@ -28,7 +28,7 @@ const games = [
 		description: 'The Agency is calling, will you join the fight?',
 		publisher: 'Epic Games',
 		platforms: 'PlayStation',
-		price: '58.99'
+		price: 58.99
 	},
 
 	{
@@ -36,7 +36,7 @@ const games = [
 		description: 'Authentic soccer experience',
 		publisher: 'Electronic Arts',
 		platforms: 'PlayStation',
-		price: '39.99'
+		price: 39.99
 	},
 
 	{
@@ -44,7 +44,7 @@ const games = [
 		description: 'Arctic invaders have turned Donkey Kong Island into their personal frozen fortress, and it’s up to you to save the day',
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
-		price: '59.99'
+		price: 59.99
 	},
 
 	{
@@ -52,7 +52,7 @@ const games = [
 		description: 'Explore a blocky, procedurally-generated 3D world',
 		publisher: 'Mojang',
 		platforms: 'XBox',
-		price: '19.99'
+		price: 19.99
 	},
 
 	{
@@ -60,7 +60,7 @@ const games = [
 		description: 'Follow criminals and their efforts to commit heists while under pressure from a government agency',
 		publisher: 'Rockstar Games',
 		platforms: 'XBox',
-		price: '9.99'
+		price: 9.99
 	}
 ];
 
