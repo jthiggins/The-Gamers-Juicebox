@@ -36,24 +36,46 @@
   };
 }
 
-function sortGames(sortPick) {
-alert(sortPick);
-	if (sortPick == "0"){
-		games.sort(compareValues('title'));
-		alert("fuc");
-	}
+function sortGames() {
+var gamesEdit = games;
+var sortPick = document.getElementById("sortDrop").value;
+var plat = document.getElementById("platDrop").value;
+var price = document.getElementById("priceDrop").value;
+
+
 	if (sortPick === "A"){
-		games.sort(compareValues('title'));
+		gamesEdit.sort(compareValues('title'));
 	}
 	if (sortPick === "Z"){
-		games.sort(compareValues('title', 'desc'));
+		gamesEdit.sort(compareValues('title', 'desc'));
 	}
 	if (sortPick === "$"){
-		games.sort(compareValues('price'));
+		gamesEdit.sort(compareValues('price'));
 	}
 	if (sortPick === "$$$"){
-		games.sort(compareValues('price', desc));
+		gamesEdit.sort(compareValues('price', desc));
 	}
+	
+	if (plat != "0") {
+	var platFilt = games.filter(function(platGames) {return platGames.platforms == plat;});
+	gamesEdit = platFilt;
+	}
+	
+	var priceFilt;
+	if (price === "1"){
+		priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price < 15;});
+		gamesEdit = priceFilt;
+	}
+	if (price === "2"){
+		priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price < 30;});
+		gamesEdit = priceFilt.filter(function(priceGames) {return priceGames.price > 15;});
+	}
+	if (price === "3"){
+		priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price > 30;});
+		gamesEdit = priceFilt;
+	}
+	
+	alert(gamesEdit);
 }
 </script>
 
@@ -68,13 +90,28 @@ alert(sortPick);
 
 <h1 class="center">Browse Games</h1>
 
-<select onChange="sortGames(this.value)" id="sortDrop">
+<div>
+<select id="sortDrop">
 	<option value="0" selected>Sort...</option>
     <option value="A">A-Z</option>
 	<option value="Z">Z-A</option>
 	<option value="$">$-$$$</option>
 	<option value="$$$">$$$-$</option>
 </select>
+<select id="platDrop">
+	<option value="0" selected>Platform...</option>
+    <option value="XBox">XBox</option>
+	<option value="PlayStation">PlayStation</option>
+	<option value="Nintendo Switch">Nintendo Switch</option>
+</select>
+<select id="priceDrop">
+	<option value="0" selected>Price Range...</option>
+    <option value="1">$0-$15</option>
+	<option value="2">$15-$30</option>
+	<option value="3">$30+</option>
+</select>
+<button on:click={sortGames}>Go</button>
+</div>
 
 
 <div id="display" bind:this={container}>
