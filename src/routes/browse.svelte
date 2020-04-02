@@ -7,43 +7,44 @@
     import GameDisplay from '../components/GameDisplay.svelte';
     import games from './_games';
 	var gamesEdit = games;
-    let container;
+	let container;
+	
+	let sortPick;
+	let plat;
+	let price;
+
     onMount(() => {
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(98vh - ${top}px)`;
     });
 	
 	function compareValues(key, order = 'asc') {
-  return function innerSort(a, b) {
-    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      // property doesn't exist on either object
-      return 0;
-    }
+		return function innerSort(a, b) {
+			if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+			// property doesn't exist on either object
+			return 0;
+			}
 
-    const varA = (typeof a[key] === 'string')
-      ? a[key].toUpperCase() : a[key];
-    const varB = (typeof b[key] === 'string')
-      ? b[key].toUpperCase() : b[key];
+			const varA = (typeof a[key] === 'string')
+			? a[key].toUpperCase() : a[key];
+			const varB = (typeof b[key] === 'string')
+			? b[key].toUpperCase() : b[key];
 
-    let comparison = 0;
-    if (varA > varB) {
-      comparison = 1;
-    } else if (varA < varB) {
-      comparison = -1;
-    }
-    return (
-      (order === 'desc') ? (comparison * -1) : comparison
-    );
-  };
-}
+			let comparison = 0;
+			if (varA > varB) {
+			comparison = 1;
+			} else if (varA < varB) {
+			comparison = -1;
+			}
+			return (
+			(order === 'desc') ? (comparison * -1) : comparison
+			);
+		};
+	}
 
 
 function sortGames() {
-gamesEdit = games;
-var sortPick = document.getElementById("sortDrop").value;
-var plat = document.getElementById("platDrop").value;
-var price = document.getElementById("priceDrop").value;
-
+	gamesEdit = games;
 
 	if (sortPick === "A"){
 		gamesEdit.sort(compareValues('title'));
@@ -59,8 +60,8 @@ var price = document.getElementById("priceDrop").value;
 	}
 	
 	if (plat != "0") {
-	var platFilt = games.filter(function(platGames) {return platGames.platforms == plat;});
-	gamesEdit = platFilt;
+		var platFilt = games.filter(function(platGames) {return platGames.platforms == plat;});
+		gamesEdit = platFilt;
 	}
 	
 	var priceFilt;
@@ -93,26 +94,26 @@ var price = document.getElementById("priceDrop").value;
 <h1 class="center">Browse Games</h1>
 
 <div> 
-<select id="sortDrop">
-	<option value="0" selected>Sort...</option>
-    <option value="A">A-Z</option>
-	<option value="Z">Z-A</option>
-	<option value="$">$-$$$</option>
-	<option value="$$$">$$$-$</option>
-</select>
-<select id="platDrop">
-	<option value="0" selected>Platform...</option>
-    <option value="XBox">XBox</option>
-	<option value="PlayStation">PlayStation</option>
-	<option value="Nintendo Switch">Nintendo Switch</option>
-</select>
-<select id="priceDrop">
-	<option value="0" selected>Price Range...</option>
-    <option value="1">$0-$15</option>
-	<option value="2">$15-$30</option>
-	<option value="3">$30+</option>
-</select>
-<button on:click={sortGames}>Go</button>
+	<select bind:this={sortPick}>
+		<option value="0" selected>Sort...</option>
+		<option value="A">A-Z</option>
+		<option value="Z">Z-A</option>
+		<option value="$">$-$$$</option>
+		<option value="$$$">$$$-$</option>
+	</select>
+	<select bind:this={plat}>
+		<option value="0" selected>Platform...</option>
+		<option value="XBox">XBox</option>
+		<option value="PlayStation">PlayStation</option>
+		<option value="Nintendo Switch">Nintendo Switch</option>
+	</select>
+	<select bind:this={price}>
+		<option value="0" selected>Price Range...</option>
+		<option value="1">$0-$15</option>
+		<option value="2">$15-$30</option>
+		<option value="3">$30+</option>
+	</select>
+	<button on:click={sortGames}>Go</button>
 </div>
 
 
