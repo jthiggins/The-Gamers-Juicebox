@@ -12,7 +12,7 @@
 	let sortPick;
 	let plat;
 	let price;
-	let searchText;
+	let searchText = "";
 	let description;
 	let title;
 
@@ -45,49 +45,51 @@
 		};
 	}
 
+	function sortGames() {
+		gamesEdit = games;
 
-function sortGames() {
-	gamesEdit = games;
-
-	if (sortPick === "A"){
-		gamesEdit.sort(compareValues('title'));
+		if (sortPick === "A"){
+			gamesEdit.sort(compareValues('title'));
+		}
+		if (sortPick === "Z"){
+			gamesEdit.sort(compareValues('title', 'desc'));
+		}
+		if (sortPick === "$"){
+			gamesEdit.sort(compareValues('price'));
+		}
+		if (sortPick === "$$$"){
+			gamesEdit.sort(compareValues('price', 'desc'));
+		}
+		
+		if (plat != "0") {
+			var platFilt = games.filter(function(platGames) {return platGames.platforms == plat;});
+			gamesEdit = platFilt;
+		}
+		
+		var priceFilt;
+		if (price === "1"){
+			priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price < 15;});
+			gamesEdit = priceFilt;
+		}
+		if (price === "2"){
+			priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price < 30;});
+			gamesEdit = priceFilt.filter(function(priceGames) {return priceGames.price > 15;});
+		}
+		if (price === "3"){
+			priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price > 30;});
+			gamesEdit = priceFilt;
+		}
+		
+		if (searchText != "") {
+			gamesEdit = gamesEdit.filter(function(searchGames) {
+				console.log(searchGames)
+				return searchGames.description.search(searchText) != -1 
+					|| searchGames.title.search(searchText) != -1;
+			});
+		}
+		
+		gamesEdit = gamesEdit;
 	}
-	if (sortPick === "Z"){
-		gamesEdit.sort(compareValues('title', 'desc'));
-	}
-	if (sortPick === "$"){
-		gamesEdit.sort(compareValues('price'));
-	}
-	if (sortPick === "$$$"){
-		gamesEdit.sort(compareValues('price', 'desc'));
-	}
-	
-	if (plat != "0") {
-		var platFilt = games.filter(function(platGames) {return platGames.platforms == plat;});
-		gamesEdit = platFilt;
-	}
-	
-	var priceFilt;
-	if (price === "1"){
-		priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price < 15;});
-		gamesEdit = priceFilt;
-	}
-	if (price === "2"){
-		priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price < 30;});
-		gamesEdit = priceFilt.filter(function(priceGames) {return priceGames.price > 15;});
-	}
-	if (price === "3"){
-		priceFilt = gamesEdit.filter(function(priceGames) {return priceGames.price > 30;});
-		gamesEdit = priceFilt;
-	}
-	
-	if (searchText != "") {
-		gamesEdit = gamesEdit.filter(function(searchGames) {return searchGames.description.search(searchText) != -1 
-			     || return searchGames.title.search(searchText) != -1;});
-	}
-	
-	gamesEdit = gamesEdit;
-}
 </script>
 
 <style>
@@ -102,26 +104,26 @@ function sortGames() {
 <h1 class="center">Browse Games</h1>
 
 <div> 
-	<select bind:this={sortPick}>
+	<select bind:value={sortPick}>
 		<option value="0" selected>Sort...</option>
 		<option value="A">A-Z</option>
 		<option value="Z">Z-A</option>
 		<option value="$">$-$$$</option>
 		<option value="$$$">$$$-$</option>
 	</select>
-	<select bind:this={plat}>
+	<select bind:value={plat}>
 		<option value="0" selected>Platform...</option>
 		<option value="XBox">XBox</option>
 		<option value="PlayStation">PlayStation</option>
 		<option value="Nintendo Switch">Nintendo Switch</option>
 	</select>
-	<select bind:this={price}>
+	<select bind:value={price}>
 		<option value="0" selected>Price Range...</option>
 		<option value="1">$0-$15</option>
 		<option value="2">$15-$30</option>
 		<option value="3">$30+</option>
 	</select>
-	<input bind:this={searchText} type="text">
+	<input bind:value={searchText} type="text">
 	<button on:click={sortGames}>Go</button>
 </div>
 
