@@ -12,6 +12,9 @@
 	let sortPick;
 	let plat;
 	let price;
+	let searchText;
+	let description;
+	let title;
 
     onMount(() => {
         const { top } = container.getBoundingClientRect();
@@ -78,6 +81,11 @@ function sortGames() {
 		gamesEdit = priceFilt;
 	}
 	
+	if (searchText != "") {
+		gamesEdit = gamesEdit.filter(function(searchGames) {return searchGames.description.search(searchText) != -1 
+			     || return searchGames.title.search(searchText) != -1;});
+	}
+	
 	gamesEdit = gamesEdit;
 }
 </script>
@@ -113,6 +121,7 @@ function sortGames() {
 		<option value="2">$15-$30</option>
 		<option value="3">$30+</option>
 	</select>
+	<input bind:this={searchText} type="text">
 	<button on:click={sortGames}>Go</button>
 </div>
 
