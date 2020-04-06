@@ -8,7 +8,7 @@
     import games from './_games';
 	var gamesEdit = games;
 	let container;
-	
+
 	let sortPick;
 	let plat;
 	let price;
@@ -86,9 +86,18 @@
 				return searchGames.description.search(searchText) != -1 
 					|| searchGames.title.search(searchText) != -1;
 			});
+			relate();
 		}
 		
 		gamesEdit = gamesEdit;
+	}
+	
+	let gamesRelate;
+	function relate() {
+		if (Array.isArray(gamesEdit) && gamesEdit.length) {
+			gamesRelate = games.filter(function(relateGames) {return relateGames.platforms == gamesEdit[0].platforms;});
+		}
+		alert(gamesRelate);
 	}
 </script>
 
@@ -126,7 +135,6 @@
 	<input bind:value={searchText} type="text">
 	<button on:click={sortGames}>Go</button>
 </div>
-
 
 <div id="display" bind:this={container}>
     {#each gamesEdit as game}
