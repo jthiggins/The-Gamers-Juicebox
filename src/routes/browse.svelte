@@ -92,12 +92,13 @@
 		gamesEdit = gamesEdit;
 	}
 	
-	let gamesRelate;
+	let gamesRelate = games;
 	function relate() {
 		if (Array.isArray(gamesEdit) && gamesEdit.length) {
 			gamesRelate = games.filter(function(relateGames) {return relateGames.platforms == gamesEdit[0].platforms;});
 		}
 		alert(gamesRelate);
+		gamesRelate = gamesRelate;
 	}
 </script>
 
@@ -106,7 +107,6 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        overflow-y: scroll;
     }
 </style>
 
@@ -141,3 +141,12 @@
     <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
     {/each}
 </div>
+
+<h1 class="center">Related Search</h1>
+
+<div bind:this={container}>
+    {#each gamesRelate as game}
+    <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
+    {/each}
+</div>
+
