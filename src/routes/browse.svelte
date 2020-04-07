@@ -19,7 +19,7 @@
 
     onMount(() => {
         const { top } = container.getBoundingClientRect();
-        //container.style.height = `calc(98vh - ${top}px)`;
+        container.style.height = `calc(98vh - ${top}px)`;
     });
 	
 	function compareValues(key, order = 'asc') {
@@ -86,7 +86,6 @@
 				return searchGames.description.search(searchText) != -1 
 					|| searchGames.title.search(searchText) != -1;
 			});
-			console.log(gamesEdit);
 			relate();
 		} else {
 			gamesRelate = [];
@@ -97,18 +96,21 @@
 
 	function relate() {
 		if (Array.isArray(gamesEdit) && gamesEdit.length != games.length) {
-			gamesRelate = games.filter(function(relateGames) {return relateGames.platforms == gamesEdit[0].platforms;});
+			gamesRelate = games.filter(function(relateGames) {return relateGames != gamesEdit[0] && relateGames.platforms == gamesEdit[0].platforms;});
 		}
 		//alert(gamesRelate);
 	}
 </script>
 
 <style>
-    div {
+    .display-container {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
+	#container {
+		overflow-y: scroll;
+	}
 </style>
 
 <h1 class="center">Browse Games</h1>
@@ -137,18 +139,20 @@
 	<button on:click={sortGames}>Go</button>
 </div>
 
-<div id="display" bind:this={container}>
-    {#each gamesEdit as game}
-    <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
-    {/each}
-</div>
+<div id="container" bind:this={container}>
+	<div class="display-container" id="display">
+		{#each gamesEdit as game}
+		<GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
+		{/each}
+	</div>
 
-{#if gamesRelate.length}
-<h1 class="center">Related Search</h1>
+	{#if gamesRelate.length}
+	<h1 class="center">Related Search</h1>
 
-<div>
-    {#each gamesRelate as game}
-    <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
-    {/each}
+	<div class="display-container">
+		{#each gamesRelate as game}
+		<GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
+		{/each}
+	</div>
+	{/if}
 </div>
-{/if}
