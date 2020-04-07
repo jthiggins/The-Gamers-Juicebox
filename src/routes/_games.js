@@ -4,7 +4,8 @@ const games = [
 		description: 'Explore the world freely by collecting multipurpose items to aid in objectives or solving puzzles and side quests for rewards',
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
-		price: 59.99
+		price: 59.99,
+		imgSrc: 'https://static.bhphoto.com/images/images2500x2500/1484750876_1311612.jpg'
 	},
 
 	{

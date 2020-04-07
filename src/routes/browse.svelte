@@ -139,20 +139,22 @@
 	<button on:click={sortGames}>Go</button>
 </div>
 
-<div id="container" bind:this={container}>
-	<div class="display-container" id="display">
-		{#each gamesEdit as game}
-		<GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
-		{/each}
-	</div>
+<div style="position:relative">
+	<div id="container" bind:this={container}>
+		<div class="display-container" id="display">
+			{#each gamesEdit as game}
+			<GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;" expandable={true}/>
+			{/each}
+		</div>
 
-	{#if gamesRelate.length}
-	<h1 class="center">Related Search</h1>
+		{#if gamesRelate.length}
+		<h1 class="center">Related Search</h1>
 
-	<div class="display-container">
-		{#each gamesRelate as game}
-		<GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
-		{/each}
+		<div class="display-container">
+			{#each gamesRelate as game}
+			<GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;" expandable={true}/>
+			{/each}
+		</div>
+		{/if}
 	</div>
-	{/if}
 </div>
