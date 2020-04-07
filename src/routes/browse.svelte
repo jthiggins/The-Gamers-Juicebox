@@ -6,7 +6,8 @@
     import { onMount } from 'svelte';
     import GameDisplay from '../components/GameDisplay.svelte';
     import games from './_games';
-	var gamesEdit = games;
+	let gamesEdit = games;
+	let gamesRelate = [];
 	let container;
 
 	let sortPick;
@@ -18,7 +19,7 @@
 
     onMount(() => {
         const { top } = container.getBoundingClientRect();
-        container.style.height = `calc(98vh - ${top}px)`;
+        //container.style.height = `calc(98vh - ${top}px)`;
     });
 	
 	function compareValues(key, order = 'asc') {
@@ -82,23 +83,23 @@
 		
 		if (searchText != "") {
 			gamesEdit = gamesEdit.filter(function(searchGames) {
-				console.log(searchGames)
 				return searchGames.description.search(searchText) != -1 
 					|| searchGames.title.search(searchText) != -1;
 			});
+			console.log(gamesEdit);
 			relate();
+		} else {
+			gamesRelate = [];
 		}
 		
 		gamesEdit = gamesEdit;
 	}
-	
-	let gamesRelate = games;
+
 	function relate() {
-		if (Array.isArray(gamesEdit) && gamesEdit.length) {
+		if (Array.isArray(gamesEdit) && gamesEdit.length != games.length) {
 			gamesRelate = games.filter(function(relateGames) {return relateGames.platforms == gamesEdit[0].platforms;});
 		}
-		alert(gamesRelate);
-		gamesRelate = gamesRelate;
+		//alert(gamesRelate);
 	}
 </script>
 
@@ -142,11 +143,12 @@
     {/each}
 </div>
 
+{#if gamesRelate.length}
 <h1 class="center">Related Search</h1>
 
-<div bind:this={container}>
+<div>
     {#each gamesRelate as game}
     <GameDisplay {game} style="margin-right: 10px; margin-bottom: 10px;"/>
     {/each}
 </div>
-
+{/if}
