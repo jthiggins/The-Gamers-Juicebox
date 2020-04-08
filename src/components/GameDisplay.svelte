@@ -1,44 +1,20 @@
 <script>
-    import { onMount, beforeUpdate, afterUpdate } from 'svelte';
     import { fade } from 'svelte/transition';
     export let game;
     export let expandable = false;
     export let style = '';
     export let expandedBackgroundColor = 'white';
 
-    let normalContainer;
-    let expandedContainer;
     let expanded = false;
-    let offsetTop = 0;
-    let offsetLeft = 0;
-
-    onMount(() => {
-        if (normalContainer) {
-            offsetLeft = normalContainer.offsetLeft;
-            offsetTop = normalContainer.offsetTop;
-        }
-    });
-
-    beforeUpdate(() => {
-        if (normalContainer) {
-            offsetLeft = normalContainer.offsetLeft;
-            offsetTop = normalContainer.offsetTop;
-        }
-    });
-
-    afterUpdate(() => {
-        if (expandedContainer) {
-            expandedContainer.style.left = offsetLeft + 'px';
-            expandedContainer.style.top = offsetTop + 'px';
-        }
-    });
 
     function expand() {
         expanded = true;
     }
 
-    function contract() {
+    function contract(e) {
         expanded = false;
+        // Needed to prevent click handler being called on the normal container when in expanded view
+        e.stopPropagation();
     }
 </script>
 
@@ -50,17 +26,22 @@
         height: 100vh;
         width: 100vw;
         background-color: rgba(0, 0, 0, 0.3);
+        z-index: 999;
     }
     .expanded-game-container {
         position: absolute;
+        top: 0;
+        left: 0;
         width: 600px;
         padding: 5px;
+        z-index: 1000;
     }
     .game-container {
         border: 1px solid black;
         font-size: 16pt;
         width: 400px;
         padding: 5px;
+        position: relative;
     }
     .placeholder {
         width: 150px;
@@ -80,37 +61,36 @@
 </style>
 
 {#if game}
-    {#if expandable && expanded}
-        <div class="expanded-background" on:click={contract} transition:fade></div>
-        <div class="expanded-game-container" on:click={contract} transition:fade style="background-color: {expandedBackgroundColor}" bind:this={expandedContainer}>
-            <img src={game.imgSrc} alt="Cover art of {game.title}"/>
-            <div style="margin-top: 10px">
-                <strong>{game.title}</strong>
+    <div class="game-container" {style} on:click={expand}>
+        {#if expandable && expanded}
+            <div class="expanded-background" on:click={contract} transition:fade></div>
+            <div class="expanded-game-container" on:click={contract} transition:fade style="background-color: {expandedBackgroundColor}">
+                <img src={game.imgSrc} alt="Cover art of {game.title}"/>
+                <div style="margin-top: 10px">
+                    <strong>{game.title}</strong>
+                </div>
+                <div>
+                    <p>Description: {game.description}</p>
+                </div>
+                <div>
+                    <p>Publisher: {game.publisher}</p>
+                </div>
+                <div>
+                    <p>Platforms: {game.platforms}</p>
+                </div>
+                <div>
+                    <p>Price: {game.price}</p>
+                </div>
             </div>
-            <div>
-                <p>Description: {game.description}</p>
-            </div>
-            <div>
-                <p>Publisher: {game.publisher}</p>
-            </div>
-            <div>
-                <p>Platforms: {game.platforms}</p>
-            </div>
-            <div>
-                <p>Price: {game.price}</p>
-            </div>
+        {/if}
+        <img src={game.imgSrc} alt="Cover art of {game.title}"/>
+        <div style="margin-top: 10px">
+            <strong>{game.title}</strong>
         </div>
-    {:else}
-        <div class="game-container" {style} on:click={expand} transition:fade bind:this={normalContainer}>
-            <img src={game.imgSrc} alt="Cover art of {game.title}"/>
-            <div style="margin-top: 10px">
-                <strong>{game.title}</strong>
-            </div>
-            <div>
-                <p>{game.description}</p>
-            </div>
+        <div>
+            <p>{game.description}</p>
         </div>
-    {/if}
+    </div>
 {:else}
     <div class="placeholder" {style}>
         <p>Insert game here</p>
