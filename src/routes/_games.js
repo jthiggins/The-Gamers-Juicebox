@@ -5,7 +5,8 @@ const games = [
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
 		price: 59.99,
-		imgSrc: 'https://static.bhphoto.com/images/images2500x2500/1484750876_1311612.jpg'
+		imgSrc: 'https://static.bhphoto.com/images/images2500x2500/1484750876_1311612.jpg',
+		genre: 'Action-adventure'
 	},
 
 	{
@@ -14,7 +15,8 @@ const games = [
 		publisher: 'Activision',
 		platforms: 'PlayStation',
 		price: 59.99,
-		imgSrc: 'https://static.bhphoto.com/images/images500x500/1560506740_1485444.jpg'
+		imgSrc: 'https://static.bhphoto.com/images/images500x500/1560506740_1485444.jpg',
+		genre: 'First-person shooter'
 	},
 
 	{
@@ -23,7 +25,8 @@ const games = [
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
 		price: 49.99,
-		imgSrc: 'https://static.bhphoto.com/images/images500x500/1502105731_1352884.jpg'
+		imgSrc: 'https://static.bhphoto.com/images/images500x500/1502105731_1352884.jpg',
+		genre: 'Platform, Action-adventure'
 	},
 
 	{
@@ -32,7 +35,8 @@ const games = [
 		publisher: 'Epic Games',
 		platforms: 'PlayStation',
 		price: 58.99,
-		imgSrc: 'https://images-na.ssl-images-amazon.com/images/I/917JLu3S8DL._SL1500_.jpg'
+		imgSrc: 'https://images-na.ssl-images-amazon.com/images/I/917JLu3S8DL._SL1500_.jpg',
+		genre: 'Survival, Battle royale, Sandbox'
 	},
 
 	{
@@ -41,7 +45,8 @@ const games = [
 		publisher: 'Electronic Arts',
 		platforms: 'PlayStation',
 		price: 39.99,
-		imgSrc: 'https://www.fifaultimateteam.it/en/wp-content/uploads/2019/06/cover_provvisoria_fifa_20-1.png'
+		imgSrc: 'https://www.fifaultimateteam.it/en/wp-content/uploads/2019/06/cover_provvisoria_fifa_20-1.png',
+		genre: 'Sports'
 	},
 
 	{
@@ -50,7 +55,8 @@ const games = [
 		publisher: 'Nintendo',
 		platforms: 'Nintendo Switch',
 		price: 59.99,
-		imgSrc: 'https://static.bhphoto.com/images/images500x500/1517923295_1386144.jpg'
+		imgSrc: 'https://static.bhphoto.com/images/images500x500/1517923295_1386144.jpg',
+		genre: 'Platform'
 	},
 
 	{
@@ -59,7 +65,8 @@ const games = [
 		publisher: 'Mojang',
 		platforms: 'XBox',
 		price: 19.99,
-		imgSrc: 'https://images-na.ssl-images-amazon.com/images/I/816UaLYI%2BpL._SL1500_.jpg'
+		imgSrc: 'https://images-na.ssl-images-amazon.com/images/I/816UaLYI%2BpL._SL1500_.jpg',
+		genre: 'Sandbox, Survival'
 	},
 
 	{
@@ -68,7 +75,8 @@ const games = [
 		publisher: 'Rockstar Games',
 		platforms: 'XBox',
 		price: 9.99,
-		imgSrc: 'https://images-na.ssl-images-amazon.com/images/I/71w79DdTz2L._SL1057_.jpg'
+		imgSrc: 'https://images-na.ssl-images-amazon.com/images/I/71w79DdTz2L._SL1057_.jpg',
+		genre: 'Action-adventure'
 	}
 ];
 
