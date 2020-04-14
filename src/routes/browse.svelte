@@ -111,11 +111,14 @@
 	#container {
 		overflow-y: scroll;
 	}
+	#search {
+		margin-bottom: 10px;
+	}
 </style>
 
 <h1 class="center">Browse Games</h1>
 
-<div> 
+<div id="search" class="center"> 
 	<select bind:value={sortPick}>
 		<option value="0" selected>Sort...</option>
 		<option value="A">A-Z</option>
