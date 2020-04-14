@@ -32,14 +32,14 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 600px;
+        width: 400px;
         padding: 5px;
         z-index: 1000;
     }
     .game-container {
         border: 1px solid black;
         font-size: 16pt;
-        width: 400px;
+        width: 200px;
         padding: 5px;
         position: relative;
     }
@@ -73,13 +73,16 @@
                     <p>Description: {game.description}</p>
                 </div>
                 <div>
+                    <p>Genre: {game.genre}</p>
+                </div>
+                <div>
                     <p>Publisher: {game.publisher}</p>
                 </div>
                 <div>
                     <p>Platforms: {game.platforms}</p>
                 </div>
                 <div>
-                    <p>Price: {game.price}</p>
+                    <p>Price: ${game.price}</p>
                 </div>
             </div>
         {/if}
@@ -88,7 +91,7 @@
             <strong>{game.title}</strong>
         </div>
         <div>
-            <p>{game.description}</p>
+            <p>${game.price}</p>
         </div>
     </div>
 {:else}
