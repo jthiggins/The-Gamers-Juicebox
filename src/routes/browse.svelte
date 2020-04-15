@@ -96,7 +96,7 @@
 
 	function relate() {
 		if (Array.isArray(gamesEdit) && gamesEdit.length != games.length) {
-			gamesRelate = games.filter(function(relateGames) {return relateGames != gamesEdit[0] && relateGames.platforms == gamesEdit[0].platforms;});
+			gamesRelate = games.filter(function(relateGames) {return relateGames != gamesEdit[0] && relateGames.genre == gamesEdit[0].genre;});
 		}
 		//alert(gamesRelate);
 	}
@@ -119,27 +119,27 @@
 <h1 class="center">Browse Games</h1>
 
 <div id="search" class="center"> 
-	<select bind:value={sortPick}>
+	<select id="sortSelect" bind:value={sortPick}>
 		<option value="0" selected>Sort...</option>
 		<option value="A">A-Z</option>
 		<option value="Z">Z-A</option>
 		<option value="$">$-$$$</option>
 		<option value="$$$">$$$-$</option>
 	</select>
-	<select bind:value={plat}>
+	<select id="platSelect" bind:value={plat}>
 		<option value="0" selected>Platform...</option>
 		<option value="XBox">XBox</option>
 		<option value="PlayStation">PlayStation</option>
 		<option value="Nintendo Switch">Nintendo Switch</option>
 	</select>
-	<select bind:value={price}>
+	<select id="priceSelect" bind:value={price}>
 		<option value="0" selected>Price Range...</option>
 		<option value="1">$0-$15</option>
 		<option value="2">$15-$30</option>
 		<option value="3">$30+</option>
 	</select>
-	<input bind:value={searchText} type="text">
-	<button on:click={sortGames}>Go</button>
+	<input id="searchInput" name="searchInput" bind:value={searchText} type="text">
+	<button id="go" on:click={sortGames}>Go</button>
 </div>
 
 <div id="container" bind:this={container}>

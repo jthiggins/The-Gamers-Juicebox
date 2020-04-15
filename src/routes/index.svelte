@@ -41,6 +41,6 @@
         {/each}
     </div>
     <div style="margin-top: 10px">
-        <a href="browse">Browse All Games</a>
+        <a href="browse" id="toBrowse">Browse All Games</a>
     </div>
 </section>
