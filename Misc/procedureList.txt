@@ -1,0 +1,22 @@
+User:
+createUser(firstName, lastName, username, email, password)
+makeModerator(userId)
+demoteModerator(userId)
+makeAdmin(userId)
+demoteAdmin(userId)
+
+Games:
+getGames()
+createGame(title, description, publisher, platforms, price, imgSrc, genre, purchaseLink)
+
+Requests:
+getRequests()
+createRequest(userId, description)
+approveRequest(requestId)
+deleteRequest(requestId)
+
+Comments:
+getComments()
+createComment(userId, description)
+editComment(commentId, description)
+deleteComment(commentId)
