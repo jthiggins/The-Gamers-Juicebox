@@ -44,7 +44,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input type="submit" value="Submit">
+<input id="submitButton" type="submit" value="Submit">
 </div>
 </form>
 </div>

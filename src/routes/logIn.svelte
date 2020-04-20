@@ -25,7 +25,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input type="submit" value="Log In">
+<input id="submitButton" type="submit" value="Log In">
 </div>
 </form>
 </div>
