@@ -17,6 +17,13 @@
             window.location = '/';
         }
     }
+
+    function goToLogInPage() {
+        if (segment) {
+            window.location = '/logIn';
+        }
+    }
+
 </script>
 
 <style>
@@ -62,6 +69,6 @@
         <h1 on:click={goToHomePage}>The Gamer's Juicebox</h1>
     </div>
     <div class="center-align">
-        <button type="button">Log In</button>
+        <button type="button" on:click={goToLogInPage} >Log In</button>
     </div>
 </header>
