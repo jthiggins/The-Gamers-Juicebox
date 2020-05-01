@@ -13,7 +13,7 @@ var sqlConfig = {
     console.log("sql connecting...")
     let pool = await sql.connect(sqlConfig)
     let result = await pool.request()
-      request.query("exec ValidateLogin @userName='"+ uName +"', @password='"+ pass +"';", function (err, recordset))
+     // request.query("exec ValidateLogin @userName='"+ uName +"', @password='"+ pass +"';", function (err, recordset){})
 
     console.log(result )
 
