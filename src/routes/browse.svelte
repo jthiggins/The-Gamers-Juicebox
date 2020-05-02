@@ -159,3 +159,5 @@
 	</div>
 	{/if}
 </div>
+
+<a href="request">Don't see your favorite game? Request to add it to our site</a>

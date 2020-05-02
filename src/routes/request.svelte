@@ -4,31 +4,38 @@
 
 <script>
     import { onMount } from 'svelte';
+
     onMount(() => {
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(98vh - ${top}px)`;
     });
-
+	
 
 </script>
 
-<h1 class="center">Log In To Your Account</h1>
+
+<h1 class="center">Request a game</h1>
+
 <div style="border: solid black 1px; margin:20px; padding:20px">
 <form>
-
 <div style="margin-bottom: 10px">
-<label for="uName">User Name</label>
-<input type="text" required pattern="([A-Za-z0-9]+)\s*" id="uName" name="uName">
+<label for="gName">Game Name</label>
+<input type="text" required id="gName" name="gName">
 </div>
 
 <div style="margin-bottom: 10px">
-<label for="pass">Password</label>
-<input type="password" required id="pass" name="pass">
+<label for="pName">Publisher</label>
+<input type="text" required id="pName" name="pName">
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Log In">
+<label for="releaseD">Release Date</label>
+<input type="text" required id="releaseD" name="releaseD">
 </div>
+
+<div style="margin-bottom: 10px">
+<input id="submitButton" type="submit" value="Submit">
+</div>
+
 </form>
-<a href="register">Don't have an account? Create one here</a>
 </div>

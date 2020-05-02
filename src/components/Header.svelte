@@ -19,9 +19,7 @@
     }
 
     function goToLogInPage() {
-        if (segment) {
-            window.location = '/logIn';
-        }
+        window.location = '/logIn';
     }
 
 </script>
