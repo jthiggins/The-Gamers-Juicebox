@@ -10,6 +10,10 @@
         container.style.height = `calc(98vh - ${top}px)`;
     });
 	
+	function sendRequest() {
+		alert("Thanks for your request, sending you back to browse");
+		window.location = '/browse';
+	}
 
 </script>
 
@@ -34,7 +38,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Submit">
+<button id="submitButton" on:click={sendRequest}>Submit</button>
 </div>
 
 </form>
