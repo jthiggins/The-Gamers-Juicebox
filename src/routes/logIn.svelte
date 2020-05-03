@@ -8,8 +8,21 @@
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(98vh - ${top}px)`;
     });
+</script>
+<script src="dbApi.js"></script>
 
-
+<script>
+    function validateUser() {
+        var userId = document.getElementById("uName");
+        var pw = document.getElementById("pass");
+        var validUser = validateLogin(userId.value, pw.value);
+        if (validUser = true) {
+             window.location = '/browse';
+        }
+        else {
+            alert("Invalid username or password");
+        }
+    }
 </script>
 
 <h1 class="center">Log In To Your Account</h1>
@@ -27,7 +40,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Log In">
+<input id="submitButton" type="submit" value="Log In" onClientClick="return validateUser()">
 </div>
 </form>
 <a href="register">Don't have an account? Create one here</a>
