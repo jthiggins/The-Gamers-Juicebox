@@ -11,6 +11,7 @@
     });
     
     function validateUser() {
+        alert("Testing");
         var userId = document.getElementById("uName");
         var pw = document.getElementById("pass");
         var validUser = validateLogin(userId.value, pw.value);
@@ -38,7 +39,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Log In" onClientClick="return validateUser()">
+<button on:click={() => validateUser()}> Log In </button>
 </div>
 </form>
 <a href="register" id="goToReg">Don't have an account? Create one here</a>
