@@ -41,5 +41,5 @@
 <input id="submitButton" type="submit" value="Log In" onClientClick="return validateUser()">
 </div>
 </form>
-<a href="register">Don't have an account? Create one here</a>
+<a href="register" id="goToReg">Don't have an account? Create one here</a>
 </div>
