@@ -39,7 +39,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Log In" onClientClick="return validateUser()">
+<button on:click={() => validateUser()}> Log In </button>
 </div>
 </form>
 <a href="register">Don't have an account? Create one here</a>
