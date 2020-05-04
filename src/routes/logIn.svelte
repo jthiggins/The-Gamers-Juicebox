@@ -11,6 +11,7 @@
     });
     
     function validateUser() {
+        alert("Testing");
         var userId = document.getElementById("uName");
         var pw = document.getElementById("pass");
         var validUser = validateLogin(userId.value, pw.value);
