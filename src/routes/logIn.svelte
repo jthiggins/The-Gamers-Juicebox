@@ -1,5 +1,6 @@
 <svelte:head>
     <title>Browse Games - The Gamer's Juicebox</title>
+    <script src="dbApi.js"></script>
 </svelte:head>
 
 <script>
@@ -8,10 +9,7 @@
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(98vh - ${top}px)`;
     });
-</script>
-<script src="dbApi.js"></script>
-
-<script>
+    
     function validateUser() {
         var userId = document.getElementById("uName");
         var pw = document.getElementById("pass");
