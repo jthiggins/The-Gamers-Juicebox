@@ -67,6 +67,6 @@
         <h1 on:click={goToHomePage}>The Gamer's Juicebox</h1>
     </div>
     <div class="center-align">
-        <button type="button" on:click={goToLogInPage} >Log In</button>
+        <button type="button" id="toLogin" on:click={goToLogInPage} >Log In</button>
     </div>
 </header>

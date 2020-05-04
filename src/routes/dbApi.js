@@ -1,4 +1,5 @@
-// npm install mssql
+// npm install mssql\
+// npm install msnodesqlv8
 var sql = require('mssql/msnodesqlv8');
 
 const pool = new sql.ConnectionPool({
