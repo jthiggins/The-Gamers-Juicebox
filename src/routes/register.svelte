@@ -60,7 +60,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Submit" onClientClick="return createAccount()>
+<input id="submitButton" type="submit" value="Submit" onClientClick="return createAccount()">
 </div>
 </form>
 </div>
