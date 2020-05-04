@@ -9,8 +9,24 @@
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(98vh - ${top}px)`;
     });
-	
+</script>
 
+<script src="dbApi.js"></script>
+
+<script>
+    function createAccount() {
+	var first = document.getElementById("fName");
+	var last = document.getElementById("lName");
+        var userId = document.getElementById("uName");
+        var pw = document.getElementById("pass");
+        var validUser = addUpdateDeleteUsers(0, first.value, last.value, userId.value, pw.value, false);
+        if (validUser != -1) {
+             window.location = '/logIn';
+        }
+        else {
+            alert("Username or email already exists");
+        }
+    }
 </script>
 
 
@@ -44,7 +60,7 @@
 </div>
 
 <div style="margin-bottom: 10px">
-<input id="submitButton" type="submit" value="Submit">
+<input id="submitButton" type="submit" value="Submit" onClientClick="return createAccount()>
 </div>
 </form>
 </div>
