@@ -11,7 +11,6 @@
         const { top, left } = header.getBoundingClientRect();
         header.style.top = -top + 'px';
         header.style.left = -left + 'px';
-        console.log(session);
     });
 
     function goToHomePage() {
@@ -23,6 +22,10 @@
 
     function goToLogInPage() {
         window.location = '/logIn';
+    }
+
+    function goToLogOutPage() {
+        window.location = '/logout';
     }
 
 </script>
@@ -63,6 +66,10 @@
         flex-direction: column;
         justify-content: center;
     }
+    .horizontal-flex {
+        display: flex;
+        flex-direction: row;
+    }
 </style>
 
 <header bind:this={header}>
@@ -71,9 +78,12 @@
     </div>
     <div class="center-align">
         {#if $session.user}
-        <p>{$session.user.firstName} {$session.user.lastName}</p>
+            <div class="horizontal-flex" style="margin-right: 10px">
+                <p style="margin-right: 10px">{$session.user.firstName} {$session.user.lastName}</p>
+                <button style="margin-right: 0;" type="button" id="toLogout" on:click={goToLogOutPage}>Log Out</button>
+            </div>
         {:else}
-        <button type="button" id="toLogin" on:click={goToLogInPage} >Log In</button>
+        <button type="button" id="toLogin" on:click={goToLogInPage}>Log In</button>
         {/if}
     </div>
 </header>

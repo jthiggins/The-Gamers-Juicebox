@@ -18,7 +18,7 @@
         errorMessage.innerHTML = "Incorrect username or password.";
         errorMessage.style.display = "block";
       } else if (res.status === 0) {
-        window.location.href = "/";
+        window.location = "/";
       }
     });
   }

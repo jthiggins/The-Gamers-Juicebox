@@ -24,6 +24,7 @@
       if (res.status === 200) {
         fetch("/login", {
           method: "POST",
+          redirect: "manual",
           headers: {
             "Content-Type": "application/json"
           },
