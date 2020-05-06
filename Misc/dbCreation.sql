@@ -99,11 +99,18 @@ CREATE PROCEDURE spValidateLogin
 	@userName	varchar(100),
 	@password	nvarchar(4000)
 AS	BEGIN
-	IF EXISTS(SELECT NULL FROM Users WHERE (userName = @userName) AND (password = dbo.fnEncrypt(@password))) BEGIN
-		SELECT CAST(1 AS bit) AS success
+	IF EXISTS(SELECT userId FROM Users WHERE (userName = @userName) AND (password = dbo.fnEncrypt(@password))) BEGIN
+		SELECT CAST(1 AS bit) AS success, userId FROM Users WHERE (userName = @userName) AND (password = dbo.fnEncrypt(@password))
 	END ELSE BEGIN
 		SELECT CAST(0 AS bit) AS success, 'Invalid User Name or Password' AS [message]
 	END
+END
+GO
+--=======================================
+CREATE PROCEDURE spGetUser
+	@userId	INT
+AS	BEGIN
+	SELECT * FROM users WHERE (userId = @userId) AND (isDeleted = 0)
 END
 GO
 --=======================================

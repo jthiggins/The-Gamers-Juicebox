@@ -33,6 +33,20 @@ export async function addUpdateDeleteUsers(userId = 0, firstName, lastName, user
     });
 }
 
+export async function getUser(userId) {
+    return new Promise((resolve, reject) => {
+        pool.connect(err => {
+            const request = new sql.Request(pool);
+            request.input('userId', userId);
+            request.execute("spGetUser", (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+                pool.close();
+            });
+        });
+    });
+}
+
 export async function validateLogin(userName, password) {
     return new Promise((resolve, reject) => {
         pool.connect(err => {

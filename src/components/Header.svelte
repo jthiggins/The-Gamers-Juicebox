@@ -1,4 +1,6 @@
 <script>
+    import { stores } from '@sapper/app';
+	const { preloading, page, session } = stores();
     import { onMount } from 'svelte';
 
     export let segment;
@@ -9,6 +11,7 @@
         const { top, left } = header.getBoundingClientRect();
         header.style.top = -top + 'px';
         header.style.left = -left + 'px';
+        console.log(session);
     });
 
     function goToHomePage() {
@@ -67,6 +70,10 @@
         <h1 on:click={goToHomePage}>The Gamer's Juicebox</h1>
     </div>
     <div class="center-align">
+        {#if $session.user}
+        <p>{$session.user.firstName} {$session.user.lastName}</p>
+        {:else}
         <button type="button" id="toLogin" on:click={goToLogInPage} >Log In</button>
+        {/if}
     </div>
 </header>
