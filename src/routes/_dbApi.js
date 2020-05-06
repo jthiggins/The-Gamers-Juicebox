@@ -5,7 +5,7 @@ var sql = require('mssql/msnodesqlv8');
 const pool = new sql.ConnectionPool({
     user: 'webuser',
     password: 'webuser',
-    server: 'localhost\\MSSQLLocalDB',
+    server: '(localdb)\\MSSQLLocalDB',
     database: 'GamersJuiceBox',
     driver: 'msnodesqlv8',
     options: {
@@ -13,7 +13,7 @@ const pool = new sql.ConnectionPool({
     }
 });
 
-export async function addUpdateDeleteUsers(userId = 0, firstName, lastName, userName, email, password, deleted = false) {
+export async function addUpdateDeleteUsers(userId, firstName, lastName, userName, email, password, deleted) {
     return new Promise((resolve, reject) => {
         pool.connect(err => {
             const request = new sql.Request(pool);
