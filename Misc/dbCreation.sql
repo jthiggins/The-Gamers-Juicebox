@@ -309,7 +309,7 @@ GO
 CREATE PROCEDURE spGetAllGames
 
 AS BEGIN
-	SELECT title, price, description, platform, publisher, genre, purchaseLink, imgSrc
+	SELECT gameId, title, price, description, platform, publisher, genre, purchaseLink, imgSrc
 	FROM Games
 	WHERE isDeleted = 0
 END
