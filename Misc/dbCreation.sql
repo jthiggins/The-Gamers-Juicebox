@@ -42,6 +42,7 @@ CREATE TABLE Games (
 	isDeleted		BIT				NOT NULL	DEFAULT(0)
 );
 
+
 CREATE TABLE Comments (
 	commentId		INT				NOT NULL	PRIMARY KEY		IDENTITY,
 	userId			INT				NOT NULL	FOREIGN KEY		REFERENCES Users(userId),
@@ -77,9 +78,13 @@ CREATE TABLE [dbo].[errors](
 );
 GO
 
+ALTER TABLE Games
+ALTER COLUMN price DECIMAL(10,2)
+GO
+
 --===============================================================================Function
-CREATE FUNCTION fnEncrypt (@str	AS	nvarchar(4000)) RETURNS varbinary(64) AS BEGIN	
-	RETURN HASHBYTES('SHA2_512', @str)	
+CREATE FUNCTION fnEncrypt (@str	AS	nvarchar(4000)) RETURNS varbinary(64) AS BEGIN
+	RETURN HASHBYTES('SHA2_512', @str)
 END
 GO
 --===============================================================================Stored Procedures
@@ -95,19 +100,26 @@ BEGIN
 END
 GO
 --========================================
-CREATE PROCEDURE spValidateLogin 
+CREATE PROCEDURE spValidateLogin
 	@userName	varchar(100),
 	@password	nvarchar(4000)
 AS	BEGIN
-	IF EXISTS(SELECT NULL FROM Users WHERE (userName = @userName) AND (password = dbo.fnEncrypt(@password))) BEGIN
-		SELECT CAST(1 AS bit) AS success
+	IF EXISTS(SELECT userId FROM Users WHERE (userName = @userName) AND (password = dbo.fnEncrypt(@password))) BEGIN
+		SELECT CAST(1 AS bit) AS success, userId FROM Users WHERE (userName = @userName) AND (password = dbo.fnEncrypt(@password))
 	END ELSE BEGIN
 		SELECT CAST(0 AS bit) AS success, 'Invalid User Name or Password' AS [message]
 	END
 END
 GO
 --=======================================
-CREATE PROCEDURE spAddUpdateDelete_User 
+CREATE PROCEDURE spGetUser
+	@userId	INT
+AS	BEGIN
+	SELECT * FROM users WHERE (userId = @userId) AND (isDeleted = 0)
+END
+GO
+--=======================================
+CREATE PROCEDURE spAddUpdateDelete_User
 	@userId		INT,
 	@firstName	VARCHAR(50),
 	@lastName	VARCHAR(50),
@@ -115,7 +127,7 @@ CREATE PROCEDURE spAddUpdateDelete_User
 	@email		VARCHAR(100),
 	@password	VARCHAR(4000),
 	@delete		BIT = 0
-						
+
 AS BEGIN
 	BEGIN TRAN
 		BEGIN TRY
@@ -134,17 +146,17 @@ AS BEGIN
 				END ELSE BEGIN
 					UPDATE Users SET isDeleted = 1 WHERE userId = @userId
 					SELECT 0 AS userId
-				END 
+				END
 			END ELSE BEGIN						-- UPDATE
 				-- Check if email or userName is already in use but need to EXCLUDE the user that is doing the update
 				IF EXISTS(SELECT NULL FROM users WHERE (userId <> @userId) AND ((email = @email) OR (userName = @userName))) BEGIN
 					SELECT -1 AS userId, 'Username or email already exists' AS [message]
 				END ELSE BEGIN
-					UPDATE users 
+					UPDATE users
 					SET firstName = @firstName,
 						lastName = @lastName,
 						userName = @userName,
-						email = @email	
+						email = @email
 					WHERE userId = @userId
 
 					SELECT @userId AS userId
@@ -153,19 +165,19 @@ AS BEGIN
 		END TRY BEGIN CATCH
 			IF(@@TRANCOUNT > 0) ROLLBACK TRAN
 			DECLARE @errorParams varchar(max) = CONCAT(
-														 '	@userId = ',		@userId		
-														,', @firstName = ',		@firstName	
-														,', @lastName = ',		@lastName	
-														,', @userName = ',		@userName	
-														,', @email = ',			@email		
-														,', @password = ',		@password	
-														,', @delete = ',		@delete	
+														 '	@userId = ',		@userId
+														,', @firstName = ',		@firstName
+														,', @lastName = ',		@lastName
+														,', @userName = ',		@userName
+														,', @email = ',			@email
+														,', @password = ',		@password
+														,', @delete = ',		@delete
 												)
-			EXEC spSAVE_Error @params = @errorParams		
+			EXEC spSAVE_Error @params = @errorParams
 		END CATCH
 	IF(@@TRANCOUNT > 0) COMMIT TRAN
 END
-GO	
+GO
 --=======================================
 CREATE PROCEDURE spMakeModerator
 	@userId		INT
@@ -232,9 +244,9 @@ END
 GO
 --=========================================
 CREATE PROCEDURE spAddUpdateDelete_Games
-	@gameId			INT,			
+	@gameId			INT,
 	@title			VARCHAR(100),
-	@price			FLOAT,		
+	@price			FLOAT,
 	@platform		VARCHAR(100),
 	@description	VARCHAR(1000),
 	@publisher		VARCHAR(100),
@@ -254,17 +266,17 @@ AS BEGIN
 					SELECT -1 AS gameId, 'Game already exists with that title, publisher, and platform' AS [message]
 				END
 			END ELSE IF(@delete = 1) BEGIN		-- DELETE
-				IF NOT EXISTS (SELECT NULL FROM Games WHERE gameId = @gameId) BEGIN					
+				IF NOT EXISTS (SELECT NULL FROM Games WHERE gameId = @gameId) BEGIN
 					SELECT -1 AS gameId, 'User does not exist' AS [message]
 				END ELSE BEGIN
 					UPDATE Games SET isDeleted = 1 WHERE gameId = @gameId
 					SELECT 0 AS gameId
-				END 
+				END
 			END ELSE BEGIN						-- UPDATE
 				IF EXISTS(SELECT NULL FROM Games WHERE (gameId <> @gameId) AND title = @title AND publisher = @publisher AND platform = @platform) BEGIN
 					SELECT -1 AS gameId, 'Game already exists with that title, publisher, and platform' AS [message]
 				END ELSE BEGIN
-					UPDATE Games 
+					UPDATE Games
 					SET title =			@title,
 						price =			@price,
 						platform =		@platform,
@@ -281,18 +293,18 @@ AS BEGIN
 		END TRY BEGIN CATCH
 			IF(@@TRANCOUNT > 0) ROLLBACK TRAN
 			DECLARE @errorParams varchar(max) = CONCAT(
-														 '	@gameId = ',			@gameId		
-														,', @title = ',				@title		
-														,', @price = ',				@price		
-														,', @platform = ',			@platform	
+														 '	@gameId = ',			@gameId
+														,', @title = ',				@title
+														,', @price = ',				@price
+														,', @platform = ',			@platform
 														,', @description = ',		@description
-														,', @publisher = ',			@publisher	
-														,', @genre	 = ',			@genre		
-														,', @imgSrc	 = ',			@imgSrc		
+														,', @publisher = ',			@publisher
+														,', @genre	 = ',			@genre
+														,', @imgSrc	 = ',			@imgSrc
 														,', @purchaseLinke	 = ',	@purchaseLink
-														,', @delete	 = ',			@delete	
+														,', @delete	 = ',			@delete
 													)
-			EXEC spSAVE_Error @params = @errorParams							
+			EXEC spSAVE_Error @params = @errorParams
 
 		END CATCH
 	IF(@@TRANCOUNT > 0) COMMIT TRAN
@@ -302,9 +314,18 @@ GO
 CREATE PROCEDURE spGetAllGames
 
 AS BEGIN
-	SELECT title, price, description, platform, publisher, genre, purchaseLink, imgSrc
+	SELECT
+		title,
+		price,
+		description,
+		platform,
+		publisher,
+		genre,
+		imgSrc,
+		purchaseLink
 	FROM Games
 	WHERE isDeleted = 0
+	FOR JSON PATH
 END
 GO
 --===========================================

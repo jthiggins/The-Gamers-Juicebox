@@ -1,4 +1,6 @@
 <script>
+    import { stores } from '@sapper/app';
+	const { preloading, page, session } = stores();
     import { onMount } from 'svelte';
 
     export let segment;
@@ -20,6 +22,10 @@
 
     function goToLogInPage() {
         window.location = '/logIn';
+    }
+
+    function goToLogOutPage() {
+        window.location = '/logout';
     }
 
 </script>
@@ -60,6 +66,10 @@
         flex-direction: column;
         justify-content: center;
     }
+    .horizontal-flex {
+        display: flex;
+        flex-direction: row;
+    }
 </style>
 
 <header bind:this={header}>
@@ -67,6 +77,13 @@
         <h1 on:click={goToHomePage}>The Gamer's Juicebox</h1>
     </div>
     <div class="center-align">
-        <button type="button" id="toLogin" on:click={goToLogInPage} >Log In</button>
+        {#if $session.user}
+            <div class="horizontal-flex" style="margin-right: 10px">
+                <p style="margin-right: 10px">{$session.user.firstName} {$session.user.lastName}</p>
+                <button style="margin-right: 0;" type="button" id="toLogout" on:click={goToLogOutPage}>Log Out</button>
+            </div>
+        {:else}
+        <button type="button" id="toLogin" on:click={goToLogInPage}>Log In</button>
+        {/if}
     </div>
 </header>

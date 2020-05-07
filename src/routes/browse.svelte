@@ -19,7 +19,7 @@
 
     onMount(() => {
         const { top } = container.getBoundingClientRect();
-        container.style.height = `calc(98vh - ${top}px)`;
+        container.style.height = `calc(96vh - ${top}px)`;
     });
 	
 	function compareValues(key, order = 'asc') {
