@@ -16,8 +16,12 @@
 
 <div id="container">
     {#if request}
-        <p>{new Date(request.requestDate).toLocaleDateString()}</p>
-        <p>{request.description}</p>
+        <p>{request.requestDate}</p>
+        <p>{request.title}</p>
+	<p>{request.platform}</p>
+	<p>{request.publisher}</p>
+	<p>{request.genre}</p>
+	<p>{request.imgSrc}</p>
         <p id="acceptRequest" on:click={acceptRequest(request)}>Accept Request</p>
         <p id="declineRequest" on:click={declineRequest(request)}>Decline Request</p>
     {/if}
