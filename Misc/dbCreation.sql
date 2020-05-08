@@ -517,3 +517,12 @@ AS BEGIN
 	WHERE c.isDeleted = 0
 END
 GO
+--============================================
+CREATE PROCEDURE spGetAllRequests
+AS BEGIN
+	SELECT gameRequestId, r.userId, requestDate, description
+	FROM Requests r
+		JOIN Users u ON u.userId = r.userId
+	WHERE r.isPending = 1
+END
+GO													    --

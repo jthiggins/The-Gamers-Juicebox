@@ -234,3 +234,16 @@ export async function getComments() {
         });
     });
 }
+
+export async function getRequests() {
+    return new Promise((resolve, reject) => {
+        pool.connect(err => {
+            const request = new sql.Request(pool);
+            request.execute("spGetAllRequests", (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+                pool.close();
+            });
+        });
+    });
+}
