@@ -28,8 +28,8 @@ describe('Sort filter and search', () => {
 	
 	it('can comment', () => {
 		cy.visit('/comments/4')
-		cy.get('#commentBox').type('Wow, this is lit')
+		cy.get('#commentBox').type('<script>alert( \'YEET!\' );</script>')
 		cy.get('#sendComment').click()
-		cy.contains('p', 'Wow, this is lit')
+		cy.visit('/comments/4')
 	});
 });
