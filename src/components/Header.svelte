@@ -27,6 +27,10 @@
     function goToLogOutPage() {
         window.location = '/logout';
     }
+	
+    function goToAdminRequestPage() {
+        window.location = '/viewRequest';
+    }
 
 </script>
 
@@ -74,7 +78,7 @@
 
 <header bind:this={header}>
     <div style="margin-left: 10px;">
-        <h1 on:click={goToHomePage}>The Gamer's Juicebox</h1>
+        <h1 on:click={goToHomePage} id="toHome">The Gamer's Juicebox</h1>
     </div>
     <div class="center-align">
         {#if $session.user}
@@ -82,6 +86,9 @@
                 <p style="margin-right: 10px">{$session.user.firstName} {$session.user.lastName}</p>
                 <button style="margin-right: 0;" type="button" id="toLogout" on:click={goToLogOutPage}>Log Out</button>
             </div>
+	    {#if $session.user.isAdmin == 1}
+		<button type="button" id="toRequest" on:click={goToAdminRequestPage}>View Request</button>
+	    {/if}
         {:else}
         <button type="button" id="toLogin" on:click={goToLogInPage}>Log In</button>
         {/if}

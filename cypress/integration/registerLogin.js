@@ -6,13 +6,13 @@ describe('Sort filter and search', () => {
 	});
 
 	it('register', () => {
-		cy.get('input[name="fName"]').type('John');
-		cy.get('input[name="lName"]').type('Doe');
-		cy.get('input[name="email"]').type('John.Doe@gmail.com');
-		cy.get('input[name="uName"]').type('JohnDoe');
-		cy.get('input[name="pass"]').type('Password1');
-		cy.get('#submitButton').click();
-		cy.contains('p', 'Account created successfully');
+		cy.get('input[name="fName"]').type('John')
+		cy.get('input[name="lName"]').type('Doe')
+		cy.get('input[name="email"]').type('John.Doe@gmail.com')
+		cy.get('input[name="uName"]').type('JohnDoe')
+		cy.get('input[name="pass"]').type('Password1')
+		cy.get('#submitButton').click()
+		cy.contains('p', 'Account created successfully')
 	});
 	
 	it('can go to login page', () => {
@@ -21,9 +21,9 @@ describe('Sort filter and search', () => {
 	});
 
 	it('login', () => {
-		cy.get('input[name="uName"]').type('JohnDoe');
-		cy.get('input[name="pass"]').type('Password1');
-		cy.get('#submitButton').click();
-		cy.contains('p', 'Logged In successfully');
+		cy.get('input[name="uName"]').type('JohnDoe')
+		cy.get('input[name="pass"]').type('Password1')
+		cy.get('#submitButton').click()
+		cy.contains('p', 'Logged In successfully')
 	});
 });
