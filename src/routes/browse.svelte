@@ -5,7 +5,8 @@
 <script>
     import { onMount } from 'svelte';
     import GameDisplay from '../components/GameDisplay.svelte';
-    import games from './_games';
+    //import games from './_games';
+    let games = [];
 	let gamesEdit = games;
 	let gamesRelate = [];
 	let container;
@@ -17,6 +18,11 @@
 	let description;
 	let title;
 
+    export async function preload() {
+        games = await this.fetch('/browse').then(res => res);
+        console.log(games);
+        gamesEdit = games;
+    }
     onMount(() => {
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(96vh - ${top}px)`;
