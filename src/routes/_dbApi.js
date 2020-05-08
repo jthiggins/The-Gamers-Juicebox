@@ -155,14 +155,21 @@ export async function getGames() {
     });
 }
 
-export async function addUpdateDeleteRequests(gameRequestId, userId, requestDate, description, deleted = false) {
+export async function addUpdateDeleteRequests(gameRequestId, userId, requestDate, description,
+                                    title, price, platform, publisher, genre, imgSrc, deleted = false) {
     return new Promise((resolve, reject) => {
         pool.connect(err => {
             const request = new sql.Request(pool);
-            request.input('gameRequestId', gameRequestIdId);
+            request.input('gameRequestId', gameRequestId);
             request.input('userId', userId);
             request.input('requestDate', requestDate);
-            request.input('description', email);
+            request.input('description', description);
+            request.input('title', title);
+            request.input('price', price);
+            request.input('platform', platform);
+            request.input('publisher', publisher);
+            request.input('genre', genre);
+            request.input('imgSrc', imgSrc);
             request.input('delete', deleted);
             request.execute("spAddUpdateDelete_Requests", (err, result) => {
                 if (err) reject(err);

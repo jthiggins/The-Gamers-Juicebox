@@ -402,9 +402,9 @@ AS BEGIN
 														,', @publisher	 = ',		@publisher
 														,', @genre		 = ',		@genre
 														,', @imgSrc		 = ',		@imgSrc
-														,', @delete	 = ',			@delete	
+														,', @delete	 = ',			@delete
 													)
-			EXEC spSAVE_Error @params = @errorParams							
+			EXEC spSAVE_Error @params = @errorParams
 
 		END CATCH
 	IF(@@TRANCOUNT > 0) COMMIT TRAN
@@ -446,13 +446,21 @@ AS BEGIN
 	END
 END
 GO
+--==========================================
+CREATE PROCEDURE spGetAllRequests
+AS BEGIN
+	SELECT gameRequestId, userId, requestDate, title, price, platform, publisher, genre, imgSrc, description
+	FROM GameRequests g
+	WHERE isDeleted = 0 AND isPending = 1 AND isAccepted = 0
+END
+GO
 --===========================================
 CREATE PROCEDURE spAddUpdateDelete_Comments
-	@commentId		INT,				
+	@commentId		INT,
 	@userId			INT,
 	@gameId			INT,
-	@commentDate	DATETIME,	
-	@description	VARCHAR(2000),			
+	@commentDate	DATETIME,
+	@description	VARCHAR(2000),
 	@delete			BIT = 0
 AS BEGIN
 	BEGIN TRAN
@@ -465,12 +473,12 @@ AS BEGIN
 				END ELSE BEGIN
 					IF NOT EXISTS(SELECT NULL FROM Users WHERE userId = @userId) BEGIN
 						SELECT -1 as commentId, 'User does not exist' AS [message]
-					END ELSE BEGIN 
+					END ELSE BEGIN
 						SELECT -1 as commentId, 'Game does not exist' AS [message]
 					END
 				END
 			END ELSE IF(@delete = 1) BEGIN		-- DELETE
-				IF NOT EXISTS (SELECT NULL FROM Comments WHERE commentId = @commentId AND userId = @userId AND gameId = @gameId) BEGIN					
+				IF NOT EXISTS (SELECT NULL FROM Comments WHERE commentId = @commentId AND userId = @userId AND gameId = @gameId) BEGIN
 					SELECT -1 AS gameRequestId, 'Request does not exist' AS [message]
 				END ELSE BEGIN
 					IF EXISTS (SELECT NULL FROM Users WHERE userId = @userId OR isAdmin = 1 OR isModerator = 1) BEGIN
@@ -479,10 +487,10 @@ AS BEGIN
 					END ELSE BEGIN
 						SELECT -1 as commentId, 'User does not have permission to delete' AS [message]
 					END
-				END 
+				END
 			END ELSE BEGIN						-- UPDATE
 				IF EXISTS(SELECT NULL FROM Comments WHERE userId=@userId AND commentId=@commentId AND gameId = @gameId) BEGIN
-					UPDATE Comments 
+					UPDATE Comments
 					SET commentDate =	@commentDate,
 						description =	@description
 					WHERE commentId = @commentId
@@ -495,14 +503,14 @@ AS BEGIN
 		END TRY BEGIN CATCH
 			IF(@@TRANCOUNT > 0) ROLLBACK TRAN
 			DECLARE @errorParams varchar(max) = CONCAT(
-														 '	@commentId = ',			@commentId		
-														,', @userId = ',			@userId	
+														 '	@commentId = ',			@commentId
+														,', @userId = ',			@userId
 														,', @gameId = ',			@gameId
-														,', @commentDate = ',		@commentDate	
-														,', @description = ',		@description	
-														,', @delete	 = ',			@delete	
+														,', @commentDate = ',		@commentDate
+														,', @description = ',		@description
+														,', @delete	 = ',			@delete
 													)
-			EXEC spSAVE_Error @params = @errorParams							
+			EXEC spSAVE_Error @params = @errorParams
 
 		END CATCH
 	IF(@@TRANCOUNT > 0) COMMIT TRAN
@@ -517,12 +525,3 @@ AS BEGIN
 	WHERE c.isDeleted = 0
 END
 GO
---============================================
-CREATE PROCEDURE spGetAllRequests
-AS BEGIN
-	SELECT gameRequestId, r.userId, requestDate, description
-	FROM Requests r
-		JOIN Users u ON u.userId = r.userId
-	WHERE r.isPending = 1
-END
-GO													    --
