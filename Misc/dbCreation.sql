@@ -83,6 +83,10 @@ ALTER COLUMN price DECIMAL(10,2)
 GO
 
 ALTER TABLE GameRequests
+ALTER COLUMN price DECIMAL(10,2)
+GO
+
+ALTER TABLE GameRequests
 ALTER COLUMN description VARCHAR(1000)
 GO
 
@@ -259,7 +263,7 @@ GO
 CREATE PROCEDURE spAddUpdateDelete_Games
 	@gameId			INT,
 	@title			VARCHAR(100),
-	@price			FLOAT,
+	@price			DECIMAL(10,2),
 	@platform		VARCHAR(100),
 	@description	VARCHAR(1000),
 	@publisher		VARCHAR(100),
@@ -347,7 +351,7 @@ CREATE PROCEDURE spAddUpdateDelete_Requests
 	@requestDate	DATE,
 	@description	VARCHAR(1000),
 	@title			VARCHAR(100),
-	@price			FLOAT,
+	@price			DECIMAL(10,2),
 	@platform		VARCHAR(100),
 	@publisher		VARCHAR(100),
 	@genre			VARCHAR(50),
