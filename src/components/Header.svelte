@@ -27,6 +27,10 @@
     function goToLogOutPage() {
         window.location = '/logout';
     }
+	
+    function goToAdminRequestPage() {
+        window.location = '/viewRequest';
+    }
 
 </script>
 
@@ -82,6 +86,9 @@
                 <p style="margin-right: 10px">{$session.user.firstName} {$session.user.lastName}</p>
                 <button style="margin-right: 0;" type="button" id="toLogout" on:click={goToLogOutPage}>Log Out</button>
             </div>
+	    {#if $session.user.isAdmin == 1}
+		<button type="button" id="toRequest" on:click={goToAdminRequestPage}>View Request</button>
+	    {/if}
         {:else}
         <button type="button" id="toLogin" on:click={goToLogInPage}>Log In</button>
         {/if}
