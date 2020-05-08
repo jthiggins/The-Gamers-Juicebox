@@ -47,12 +47,17 @@ export async function put(req, res, next) {
         return;
     }
 
+    // 403 if a non-moderator is trying to update another user's comment
+    if (!req.user.isModerator && req.body.userId != req.user.id) {
+        res.sendStatus(403);
+        return;
+    }
+
     try {
-        const result = await addUpdateDeleteComments(req.body.commentId, req.user.id, req.body.gameId, new Date().toISOString(), req.body.description, false);
+        const result = await addUpdateDeleteComments(req.body.commentId, req.body.userId, req.body.gameId, new Date().toISOString(), req.body.description, false);
         if ('message' in result.recordset[0]) {
-            // If message is in the record set, no comment was found; we'll assume this is because
-            // the user is trying to update another user's comment 
-            res.sendStatus(403);
+            // If message is in the record set, no comment was found
+            res.sendStatus(404);
             return;
         }
         res.sendStatus(200);
@@ -71,13 +76,19 @@ export async function del(req, res, next) {
     }
 
     // 400 if missing required parameters
-    if (req.body.commentId === undefined || req.body.gameId === undefined) {
+    if (req.body.userId === undefined || req.body.commentId === undefined || req.body.gameId === undefined) {
         res.sendStatus(400);
         return;
     }
 
+    // 403 if a non-moderator is trying to delete another user's comment
+    if (!req.user.isModerator && req.body.userId != req.user.id) {
+        res.sendStatus(403);
+        return;
+    }
+
     try {
-        const result = await addUpdateDeleteComments(req.body.commentId, req.user.id, req.body.gameId, '', '', true);
+        const result = await addUpdateDeleteComments(req.body.commentId, req.body.userId, req.body.gameId, '', '', true);
         if ('gameRequestId' in result.recordset[0]) {
             res.sendStatus(404);
             return;

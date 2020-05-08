@@ -22,7 +22,7 @@
     }
 
     async function editComment() {
-        if (!session.user || session.user.id != comment.userId) {
+        if (!session.user || (!session.user.isModerator && session.user.id != comment.userId)) {
             showError("You do not have permission to edit this comment.");
             return;
         }
@@ -37,6 +37,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    userId: comment.userId,
                     commentId: comment.commentId,
                     gameId: comment.gameId,
                     description: newCommentText
@@ -60,10 +61,10 @@
     }
 </style>
 
-<h1>Edit Comment</h1>
+<h1 class="center">Edit Comment</h1>
 
 <div id="error" bind:this={error}></div>
-{#if session.user && session.user.id === comment.userId}
+{#if session.user && (session.user.isModerator || session.user.id === comment.userId)}
     <form>
         <textarea bind:value={newCommentText}></textarea>
         <button on:click={e => {e.preventDefault(); editComment();}}>Edit</button>

@@ -71,7 +71,7 @@
         if (!confirm("Are you sure you want to delete this comment?")) {
             return;
         }
-        if (!session.user || comment.userId != session.user.id) {
+        if (!session.user || (!session.user.isModerator && comment.userId != session.user.id)) {
             showError("You do not have permission to delete this comment.");
             return;
         }
@@ -82,6 +82,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    userId: comment.userId,
                     commentId: comment.commentId,
                     gameId: comment.gameId
                 })
@@ -107,15 +108,20 @@
 <div id="error" bind:this={error}></div>
 
 {#if game}
-    <h1>Comments for {game.title}</h1>
-    <GameDisplay {game} expandable={true} />
+    <h1 class="center">Comments for {game.title}</h1>
+    <GameDisplay style="margin: auto" {game} fullyExpanded={true} showCommentsLink={false}/>
     {#each comments as comment}
         <CommentDisplay {comment} {deleteComment} />
     {/each}
     {#if session.user}
+        <h4>Post Comment</h4>
         <form>
-            <textarea bind:value={newCommentText}></textarea>
-            <button on:click={e => {e.preventDefault(); submitComment();}}>Post</button>
+            <div>
+                <textarea bind:value={newCommentText}></textarea>
+            </div>
+            <div>
+                <button on:click={e => {e.preventDefault(); submitComment();}}>Post</button>
+            </div>
         </form>
     {/if}
 {:else}
