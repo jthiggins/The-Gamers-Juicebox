@@ -325,7 +325,6 @@ AS BEGIN
 		purchaseLink
 	FROM Games
 	WHERE isDeleted = 0
-	FOR JSON PATH
 END
 GO
 --===========================================
