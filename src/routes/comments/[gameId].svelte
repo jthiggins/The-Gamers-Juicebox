@@ -71,7 +71,7 @@
         if (!confirm("Are you sure you want to delete this comment?")) {
             return;
         }
-        if (!session.user || comment.userId != session.user.id) {
+        if (!session.user || (!session.user.isModerator && comment.userId != session.user.id)) {
             showError("You do not have permission to delete this comment.");
             return;
         }
@@ -82,6 +82,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    userId: comment.userId,
                     commentId: comment.commentId,
                     gameId: comment.gameId
                 })

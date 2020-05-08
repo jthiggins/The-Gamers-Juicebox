@@ -1,4 +1,4 @@
-import { getRequests } from "../_dbApi";
+import { getRequests } from "./_dbApi";
 
 export async function get(req, res, next) {
     try {
