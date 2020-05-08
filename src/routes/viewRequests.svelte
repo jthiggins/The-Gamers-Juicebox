@@ -9,6 +9,7 @@
 </script>
 
 <script>
+    import viewRequestDisplay from '../../components/viewRequestDisplay.svelte';
     export let requests;
     let error;
     let newrequestText = "";
