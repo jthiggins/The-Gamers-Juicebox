@@ -2,11 +2,19 @@
     <title>Browse Games - The Gamer's Juicebox</title>
 </svelte:head>
 
+<script context="module">
+    export async function preload(page, session) {
+          const gamesFetch = await this.fetch('/gameBrowse');
+          const games = await gamesFetch.json();
+          return { games };
+    }
+</script>
+
 <script>
     import { onMount } from 'svelte';
     import GameDisplay from '../components/GameDisplay.svelte';
     //import games from './_games';
-    let games = [];
+    export let games;
 	let gamesEdit = games;
 	let gamesRelate = [];
 	let container;
@@ -18,11 +26,6 @@
 	let description;
 	let title;
 
-    export async function preload() {
-        games = await this.fetch('/browse').then(res => res);
-        console.log(games);
-        gamesEdit = games;
-    }
     onMount(() => {
         const { top } = container.getBoundingClientRect();
         container.style.height = `calc(96vh - ${top}px)`;
@@ -69,7 +72,7 @@
 		}
 		
 		if (plat != "0") {
-			var platFilt = games.filter(function(platGames) {return platGames.platforms == plat;});
+			var platFilt = games.filter(function(platGames) {return platGames.platform == plat;});
 			gamesEdit = platFilt;
 		}
 		
