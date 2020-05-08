@@ -74,7 +74,7 @@
 
 <header bind:this={header}>
     <div style="margin-left: 10px;">
-        <h1 on:click={goToHomePage}>The Gamer's Juicebox</h1>
+        <h1 on:click={goToHomePage} id="toHome">The Gamer's Juicebox</h1>
     </div>
     <div class="center-align">
         {#if $session.user}

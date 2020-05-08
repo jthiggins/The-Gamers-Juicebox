@@ -6,8 +6,8 @@ describe('Sort filter and search', () => {
 	});
 
 	it('type in info but accidentally hit register instead of login', () => {
-		cy.get('input[name="uName"]').type('JohnDoe');
-		cy.get('input[name="pass"]').type('Password1');
-		cy.get('#goToReg').click();
+		cy.get('input[name="uName"]').type('JohnDoe')
+		cy.get('input[name="pass"]').type('Password1')
+		cy.get('#goToReg').click()
 	});
 });

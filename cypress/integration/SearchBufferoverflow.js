@@ -7,7 +7,7 @@ describe('Sort filter and search', () => {
 	});
 	
 	it('overflow', () => {
-		cy.get('input[name="searchInput"]').type('');
-		cy.get('#go').click();
+		cy.get('input[name="searchInput"]').type('')
+		cy.get('#go').click()
 	});
 });
