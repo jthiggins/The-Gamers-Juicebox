@@ -117,10 +117,10 @@
         <h4>Post Comment</h4>
         <form>
             <div>
-                <textarea bind:value={newCommentText}></textarea>
+                <textarea bind:value={newCommentText} id="commentBox" name="commentBox"></textarea>
             </div>
             <div>
-                <button on:click={e => {e.preventDefault(); submitComment();}}>Post</button>
+                <button on:click={e => {e.preventDefault(); submitComment();}} id="sendComment">Post</button>
             </div>
         </form>
     {/if}
