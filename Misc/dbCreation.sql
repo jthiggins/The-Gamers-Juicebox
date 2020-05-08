@@ -82,6 +82,19 @@ ALTER TABLE Games
 ALTER COLUMN price DECIMAL(10,2)
 GO
 
+ALTER TABLE GameRequests
+ALTER COLUMN description VARCHAR(1000)
+GO
+
+ALTER TABLE GameRequests
+ADD title			VARCHAR(100)	NOT NULL,
+	price			FLOAT			NOT NULL,
+	[platform]		VARCHAR(100)	NOT NULL,
+	[publisher]		VARCHAR(100)	NOT NULL,
+	genre			VARCHAR(50)		NOT NULL,
+	imgSrc			VARCHAR(500)	NULL
+GO
+
 --===============================================================================Function
 CREATE FUNCTION fnEncrypt (@str	AS	nvarchar(4000)) RETURNS varbinary(64) AS BEGIN
 	RETURN HASHBYTES('SHA2_512', @str)
@@ -315,7 +328,6 @@ CREATE PROCEDURE spGetAllGames
 
 AS BEGIN
 	SELECT
-		gameId,
 		title,
 		price,
 		description,
@@ -330,34 +342,46 @@ END
 GO
 --===========================================
 CREATE PROCEDURE spAddUpdateDelete_Requests
-	@gameRequestId	INT,				
-	@userId			INT,				
-	@requestDate	DATE,			
-	@description	VARCHAR(2000),				
+	@gameRequestId	INT,
+	@userId			INT,
+	@requestDate	DATE,
+	@description	VARCHAR(1000),
+	@title			VARCHAR(100),
+	@price			FLOAT,
+	@platform		VARCHAR(100),
+	@publisher		VARCHAR(100),
+	@genre			VARCHAR(50),
+	@imgSrc			VARCHAR(500),
 	@delete			BIT = 0
 AS BEGIN
 	BEGIN TRAN
 		BEGIN TRY
 			IF(@gameRequestId = 0) BEGIN				-- ADD
 				IF EXISTS(SELECT NULL FROM Users WHERE userId = @userId) BEGIN
-					INSERT INTO GameRequests(userId, requestDate, description)
-					VALUES (@userId, @requestDate, @description)
+					INSERT INTO GameRequests(userId, requestDate, description, title, price, platform, publisher, genre, imgSrc)
+					VALUES (@userId, @requestDate, @description, @title, @price, @platform, @publisher, @genre, @imgSrc)
 					SELECT @@IDENTITY AS gameRequestId
 				END ELSE BEGIN
 					SELECT -1 as gameRequestId, 'User does not exist' AS [message]
 				END
 			END ELSE IF(@delete = 1) BEGIN		-- DELETE
-				IF NOT EXISTS (SELECT NULL FROM GameRequests WHERE gameRequestId = @gameRequestId AND userId = @userId) BEGIN					
+				IF NOT EXISTS (SELECT NULL FROM GameRequests WHERE gameRequestId = @gameRequestId AND userId = @userId) BEGIN
 					SELECT -1 AS gameRequestId, 'Request does not exist' AS [message]
 				END ELSE BEGIN
 					UPDATE GameRequests SET isDeleted = 1 WHERE gameRequestId = @gameRequestId
 					SELECT 0 AS gameRequestId
-				END 
+				END
 			END ELSE BEGIN						-- UPDATE
 				IF EXISTS(SELECT NULL FROM GameRequests WHERE userId=@userId AND gameRequestId=@gameRequestId) BEGIN
-				UPDATE GameRequests 
+				UPDATE GameRequests
 				SET requestDate =	@requestDate,
-					description =	@description
+					description =	@description,
+					title		=	@title,
+					price		=	@price,
+					platform	=	@platform,
+					publisher	=   @publisher,
+					genre		=   @genre,
+					imgSrc		=   @imgSrc
 				WHERE gameRequestId = @gameRequestId
 
 				SELECT @gameRequestId AS gameRequestId
@@ -368,10 +392,16 @@ AS BEGIN
 		END TRY BEGIN CATCH
 			IF(@@TRANCOUNT > 0) ROLLBACK TRAN
 			DECLARE @errorParams varchar(max) = CONCAT(
-														 '	@gameRequestId = ',		@gameRequestId		
-														,', @userId = ',			@userId		
-														,', @requestDate = ',		@requestDate	
-														,', @description = ',		@description	
+														 '	@gameRequestId = ',		@gameRequestId
+														,', @userId = ',			@userId
+														,', @requestDate = ',		@requestDate
+														,', @description = ',		@description
+														,', @title		 = ',		@title
+														,', @price		 = ',		@price
+														,', @platform	 = ',		@platform
+														,', @publisher	 = ',		@publisher
+														,', @genre		 = ',		@genre
+														,', @imgSrc		 = ',		@imgSrc
 														,', @delete	 = ',			@delete	
 													)
 			EXEC spSAVE_Error @params = @errorParams							
