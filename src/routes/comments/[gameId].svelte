@@ -66,6 +66,35 @@
             showError(err);
         }
     }
+
+    async function deleteComment(comment) {
+        if (!confirm("Are you sure you want to delete this comment?")) {
+            return;
+        }
+        if (!session.user || comment.userId != session.user.id) {
+            showError("You do not have permission to delete this comment.");
+            return;
+        }
+        try {
+            const res = await fetch('/comments', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    commentId: comment.commentId,
+                    gameId: comment.gameId
+                })
+            });
+            if (res.ok) {
+                comments = await fetch(`/comments/${game.gameId}.json`).then(res => res.json());
+            } else {
+                showError(await res.text());
+            }
+        } catch (err) {
+            showError(err);
+        }
+    }
 </script>
 
 <style>
@@ -81,7 +110,7 @@
     <h1>Comments for {game.title}</h1>
     <GameDisplay {game} expandable={true} />
     {#each comments as comment}
-        <CommentDisplay {comment} />
+        <CommentDisplay {comment} {deleteComment} />
     {/each}
     {#if session.user}
         <form>
