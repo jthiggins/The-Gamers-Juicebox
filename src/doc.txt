@@ -7,13 +7,41 @@
 	
 This is a video game catalog web application developed for Miami University's CSE 201 (Intro to Software Engineering) course during the Spring 2020 semester.
 
+================
+    Running
+================
+To run this app, you first need Node.js installed on your machine. After installing Node.js, navigate to the root
+directory of this project on your machine and run the command "npm install". This will install all of the dependencies
+for the project. To run a test server, use the command "npm run dev". This will start a local server on port 3000.
+If you want to build a production server, run "npm run build" to bundle the project into the __sapper__/build directory.
+You can use "npm run start" to start this server after building.
+
+NOTE: Currently, this app uses a local database to store data. If you would like to use the full functionality of the app,
+you will need a SQL Server instance running on your machine. You can then modify the options provided to the pool at the top
+of src/routes/_dbApi.js to fit your instance.
+
+================
+    Testing
+================
+***TODO have David fill in this section***
+
+================
+  Sapper Files
+================
+The below files are files required by Sapper, the server middleware we use to run our app. They are located in the src directory.
+In most cases, these files will not require modification.
+
 client.js
+Contains code that sets up Sapper to run on the client side (i.e. web browser).
 
 service-worker.js
+Contains service workers, which act as proxies between the client and server in order to control responses to network requests.
 
 server.js
+Contains code that sets up the web server.
 
 template.html
+An HTML template used for every page served by the server.
 
 ================
 ###components###
