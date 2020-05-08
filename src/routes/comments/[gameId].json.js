@@ -7,6 +7,7 @@ export async function get(req, res, next) {
         let result = comments.recordset.filter(comment => comment.gameId == gameId);
         res.json(result);
     } catch (err) {
-        res.status(500).send(err);
+        console.error(err);
+        res.sendStatus(500);
     }
 }

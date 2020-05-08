@@ -12,12 +12,12 @@
 
 <div id="container">
     {#if comment}
-    {#if $session.user && comment.userId == $session.user.id}
-    <p>Edit Comment</p>
-    {/if}
-    <p>{new Date(comment.commentDate).toLocaleDateString()}</p>
-    <p>{comment.description}</p>
+        {#if $session.user && comment.userId == $session.user.id}
+            <a href={`/comments/edit/${comment.commentId}`}>Edit Comment</a>
+        {/if}
+        <p>{new Date(comment.commentDate).toLocaleDateString()}</p>
+        <p>{comment.description}</p>
     {:else}
-    <p>Could not load comment.</p>
+        <p>Could not load comment.</p>
     {/if}
 </div>

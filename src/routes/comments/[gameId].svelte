@@ -56,7 +56,7 @@
                     description: newCommentText
                 })
             });
-            if (res.status == 200) {
+            if (res.ok) {
                 newCommentText = "";
                 comments = await fetch(`/comments/${game.gameId}.json`).then(res => res.json());
             } else {
