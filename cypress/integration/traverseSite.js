@@ -1,4 +1,4 @@
-describe('Sort filter and search', () => {
+describe('traverse each possible page of the site', () => {
 
 	it('home to browse', () => {
 		cy.visit('/')
@@ -21,7 +21,7 @@ describe('Sort filter and search', () => {
 	it('login to register', () => {
 		cy.visit('/logIn')
 		cy.get('#goToReg').click();
-		cy.contains('h1', 'Welcome to the Juicebox')
+		cy.contains('h1', 'Register Account')
 	});
 	
 	it('register to login', () => {
@@ -45,7 +45,7 @@ describe('Sort filter and search', () => {
 	it('browse to login', () => {
 		cy.visit('/browse')
 		cy.get('#toLogin').click()
-		cy.contains('h1', 'Welcome to the Juicebox')
+		cy.contains('h1', 'Log In To Your Account')
 	});
 
 

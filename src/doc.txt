@@ -1,0 +1,69 @@
+  _______ _    _ ______    _____          __  __ ______ _____  _  _____        _ _    _ _____ _____ ______   ____   ______   __
+ |__   __| |  | |  ____|  / ____|   /\   |  \/  |  ____|  __ \( )/ ____|      | | |  | |_   _/ ____|  ____| |  _ \ / __ \ \ / /
+    | |  | |__| | |__    | |  __   /  \  | \  / | |__  | |__) |/| (___        | | |  | | | || |    | |__    | |_) | |  | \ V / 
+    | |  |  __  |  __|   | | |_ | / /\ \ | |\/| |  __| |  _  /   \___ \   _   | | |  | | | || |    |  __|   |  _ <| |  | |> <  
+    | |  | |  | | |____  | |__| |/ ____ \| |  | | |____| | \ \   ____) | | |__| | |__| |_| || |____| |____  | |_) | |__| / . \ 
+    |_|  |_|  |_|______|  \_____/_/    \_\_|  |_|______|_|  \_\ |_____/   \____/ \____/|_____\_____|______| |____/ \____/_/ \_\
+	
+This is a video game catalog web application developed for Miami University's CSE 201 (Intro to Software Engineering) course during the Spring 2020 semester.
+
+client.js
+
+service-worker.js
+
+server.js
+
+template.html
+
+================
+###components###
+================
+
+CommentDisplay.svelte
+
+GameDisplay.svelte
+
+header.svelte
+
+viewRequestDisplay.svelte
+
+============
+###routes###
+============
+
+[commentId].svelte
+
+[gameId].json.js
+
+[gameId].svelte
+
+index.js
+
+_dbApi.js
+
+_games.js
+
+_layout.svelte
+
+browse.svelte
+
+gameBrowse.js
+
+games.js
+
+index.svelte
+
+login.js
+
+login.svelte
+
+logout.js
+
+register.js
+
+register.svelte
+
+request.svelte
+
+viewRequests.svelte
+
