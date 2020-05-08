@@ -10,7 +10,6 @@
 
 <script>
     export let requests;
-    export let session;
     let error;
     let newrequestText = "";
     function showError(errorMessage) {
@@ -74,10 +73,10 @@
 
     <h1>Requests</h1>
     {#each requests as request}
-        <requestDisplay {request} {deleterequest} />
+        <requestDisplay {request} />
     {/each}
     <form>
     	<textarea bind:value={newrequestText}></textarea>
     	<button on:click={e => {e.preventDefault(); approveRequest();}}>Approve</button>
-    	<button on:click={e => {e.preventDefault(); deleteRequest();}}>Decline</button>
+    	<button on:click={e => {e.preventDefault(); declineRequest();}}>Decline</button>
     </form>
