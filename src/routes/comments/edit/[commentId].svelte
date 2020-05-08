@@ -61,7 +61,7 @@
     }
 </style>
 
-<h1>Edit Comment</h1>
+<h1 class="center">Edit Comment</h1>
 
 <div id="error" bind:this={error}></div>
 {#if session.user && (session.user.isModerator || session.user.id === comment.userId)}

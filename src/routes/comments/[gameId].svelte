@@ -108,15 +108,20 @@
 <div id="error" bind:this={error}></div>
 
 {#if game}
-    <h1>Comments for {game.title}</h1>
-    <GameDisplay {game} expandable={true} />
+    <h1 class="center">Comments for {game.title}</h1>
+    <GameDisplay style="margin: auto" {game} fullyExpanded={true} showCommentsLink={false}/>
     {#each comments as comment}
         <CommentDisplay {comment} {deleteComment} />
     {/each}
     {#if session.user}
+        <h4>Post Comment</h4>
         <form>
-            <textarea bind:value={newCommentText}></textarea>
-            <button on:click={e => {e.preventDefault(); submitComment();}}>Post</button>
+            <div>
+                <textarea bind:value={newCommentText}></textarea>
+            </div>
+            <div>
+                <button on:click={e => {e.preventDefault(); submitComment();}}>Post</button>
+            </div>
         </form>
     {/if}
 {:else}

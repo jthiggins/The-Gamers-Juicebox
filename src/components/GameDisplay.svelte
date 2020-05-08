@@ -2,8 +2,10 @@
     import { fade } from 'svelte/transition';
     export let game;
     export let expandable = false;
+    export let fullyExpanded = false;
     export let style = '';
     export let expandedBackgroundColor = 'white';
+    export let showCommentsLink = true;
 
     let expanded = false;
 
@@ -79,20 +81,44 @@
                     <p>Publisher: {game.publisher}</p>
                 </div>
                 <div>
-                    <p>Platforms: {game.platforms}</p>
+                    <p>Platforms: {game.platform}</p>
                 </div>
                 <div>
                     <p>Price: ${game.price}</p>
                 </div>
+                {#if showCommentsLink}
+                    <div>
+                        <a href={`/comments/${game.gameId}`}>View Comments For This Game</a>
+                    </div>
+                {/if}
             </div>
         {/if}
         <img src={game.imgSrc} alt="Cover art of {game.title}"/>
         <div style="margin-top: 10px">
             <strong>{game.title}</strong>
         </div>
+        {#if fullyExpanded}
+            <div>
+                <p>Description: {game.description}</p>
+            </div>
+            <div>
+                <p>Genre: {game.genre}</p>
+            </div>
+            <div>
+                <p>Publisher: {game.publisher}</p>
+            </div>
+            <div>
+                <p>Platforms: {game.platform}</p>
+            </div>
+        {/if}
         <div>
             <p>${game.price}</p>
         </div>
+        {#if showCommentsLink}
+            <div>
+                <a href={`/comments/${game.gameId}`}>View Comments For This Game</a>
+            </div>
+        {/if}
     </div>
 {:else}
     <div class="placeholder" {style}>
