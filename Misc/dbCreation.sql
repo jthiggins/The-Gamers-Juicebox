@@ -315,6 +315,7 @@ CREATE PROCEDURE spGetAllGames
 
 AS BEGIN
 	SELECT
+		gameId,
 		title,
 		price,
 		description,
