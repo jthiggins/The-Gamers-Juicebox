@@ -207,17 +207,13 @@ export async function addUpdateDeleteComments(commentId, userId, gameId, comment
     return new Promise((resolve, reject) => {
         pool.connect(err => {
             const request = new sql.Request(pool);
+            request.input('commentId', commentId);
+            request.input('userId', userId);
             request.input('gameId', gameId);
-            request.input('title', title);
-            request.input('price', price);
-            request.input('platform', platform);
-            request.input('description', email);
-            request.input('publisher', publisher);
-            request.input('genre', genre);
-            request.input('imgSrc', imgSrc);
-            request.input('purchaseLink', purchaseLink);
+            request.input('commentDate', commentDate);
+            request.input('description', description);
             request.input('delete', deleted);
-            request.execute("spAddUpdateDelete_Games", (err, result) => {
+            request.execute("spAddUpdateDelete_Comments", (err, result) => {
                 if (err) reject(err);
                 else resolve(result);
                 pool.close();

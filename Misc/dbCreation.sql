@@ -315,6 +315,7 @@ CREATE PROCEDURE spGetAllGames
 
 AS BEGIN
 	SELECT
+		gameId,
 		title,
 		price,
 		description,
@@ -325,7 +326,6 @@ AS BEGIN
 		purchaseLink
 	FROM Games
 	WHERE isDeleted = 0
-	FOR JSON PATH
 END
 GO
 --===========================================

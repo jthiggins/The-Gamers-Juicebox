@@ -5,8 +5,10 @@
   let userId = "";
   let pw = "";
   let errorMessage;
+  let registering = false;
 
   function createAccount() {
+    registering = true;
     fetch("/register", {
       method: "POST",
       redirect: "manual",
@@ -45,6 +47,7 @@
         errorMessage.innerHTML =
           "The username or email you entered is already taken.";
         errorMessage.style.display = "block";
+        registering = false;
       }
     });
   }
@@ -113,16 +116,22 @@
       <input type="password" required id="pass" name="pass" bind:value={pw} />
     </div>
 
-    <div style="margin-bottom: 10px">
-      <button
-        id="submitButton"
-        on:click={e => {
-          e.preventDefault();
-          createAccount();
-        }}>
-        Create Account
-      </button>
-    </div>
+    {#if registering}
+      <div style="margin-bottom: 10px">
+        <button disabled>Please wait...</button>
+      </div>
+    {:else}
+      <div style="margin-bottom: 10px">
+        <button
+          id="submitButton"
+          on:click={e => {
+            e.preventDefault();
+            createAccount();
+          }}>
+          Create Account
+        </button>
+      </div>
+    {/if}
   </form>
   <p id="errorMessage" bind:this={errorMessage} />
 </div>
