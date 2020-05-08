@@ -29,7 +29,7 @@
     }
 	
     function goToAdminRequestPage() {
-        window.location = '/viewRequest';
+        window.location = '/viewRequests';
     }
 
 </script>
