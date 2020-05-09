@@ -1,0 +1,5 @@
+This application connects to a local database called GamersJuiceBox on a SQL server, (localdb)\MSSQLDB. The database is connected through a created SQL user called ‘webuser’. This documentation will hopefully show you how to get SQL server and connect to the server and create the database and create the user such that you can run our application on your machine and talk to the data.
+
+First, you want to install SQL server 2019. You can get the server here, but make sure you get the Developer edition...it’s free: https://www.microsoft.com/en-us/sql-server/sql-server-downloads. You also want to install SQL Server Management Studio at https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15 to talk to the server and run scripts. This is your IDE.
+
+Once you download and install everything, run SSMS and you will be prompted to enter in some stuff. Make sure you are looking for a Database Engine and the server is: (localdb)\MSSQLLocalDB. Then use Windows Authentication and connect to the engine.
