@@ -127,7 +127,7 @@ export async function addUpdateDeleteGames(gameId, title, price, platform, descr
             request.input('title', title);
             request.input('price', price);
             request.input('platform', platform);
-            request.input('description', email);
+            request.input('description', description);
             request.input('publisher', publisher);
             request.input('genre', genre);
             request.input('imgSrc', imgSrc);
@@ -147,6 +147,19 @@ export async function getGames() {
         pool.connect(err => {
             const request = new sql.Request(pool);
             request.execute("spGetAllGames", (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+                pool.close();
+            });
+        });
+    });
+}
+
+export async function getFirstFiveGames() {
+    return new Promise((resolve, reject) => {
+        pool.connect(err => {
+            const request = new sql.Request(pool);
+            request.execute("spGetFirstFiveGames", (err, result) => {
                 if (err) reject(err);
                 else resolve(result);
                 pool.close();

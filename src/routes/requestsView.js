@@ -2,7 +2,11 @@ import { getRequests } from "./_dbApi";
 
 export async function get(req, res, next) {
     try {
-        const requests = await getRequests();
+        const result = await getRequests();
+        let requests = [];
+        for (const request of result.recordset) {
+            requests.push(request);
+        }
         res.json(requests);
     } catch (err) {
         console.error(err);
