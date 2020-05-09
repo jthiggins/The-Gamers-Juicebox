@@ -21,11 +21,6 @@ you will need a SQL Server instance running on your machine. You can then modify
 of src/routes/_dbApi.js to fit your instance.
 
 ================
-    Testing
-================
-***TODO have David fill in this section***
-
-================
   Sapper Files
 ================
 The below files are files required by Sapper, the server middleware we use to run our app. They are located in the src directory.
@@ -48,50 +43,71 @@ An HTML template used for every page served by the server.
 ================
 
 CommentDisplay.svelte
+Handles the display of comments on each game page.
 
 GameDisplay.svelte
+The display for each game on the browse page.
 
 header.svelte
+Code for the header bar.
 
 viewRequestDisplay.svelte
+Displays user game requests for admins.
 
 ============
 ###routes###
 ============
 
 [commentId].svelte
+Handles the display and manipulation of individual comments.
 
 [gameId].json.js
+Handles method for comments for specific games.
 
 [gameId].svelte
+Page that displays all the information for a game and the comments left associated with it.
 
 index.js
+Handles creating, editing, deleting comments
 
 _dbApi.js
+Database API to run on server for storing games, comments, users.
 
 _games.js
+Temporary list of dummy data filled with games.
 
 _layout.svelte
+default svelte file
 
 browse.svelte
+The browse page, handles sorting, filtering, sorting games that are displayed.
 
 gameBrowse.js
+Function calls for the browse page.
 
 games.js
+Function call fo the sql database to retrieve games from the db.
 
 index.svelte
+Default home page for the site.
 
 login.js
+Handles function call fo the log in page.
 
 login.svelte
+Login page.
 
 logout.js
+Handles log out function and redirects to home page.
 
 register.js
+Handles data when registering account.
 
 register.svelte
+Page for registering account.
 
 request.svelte
+Page for submitting request for new games to be added to the database.
 
 viewRequests.svelte
-
+Page for admins to view all game requests and either approve or deny the requests.
