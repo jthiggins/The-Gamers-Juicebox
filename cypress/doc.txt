@@ -1,0 +1,43 @@
+  _______ _    _ ______    _____          __  __ ______ _____  _  _____        _ _    _ _____ _____ ______   ____   ______   __
+ |__   __| |  | |  ____|  / ____|   /\   |  \/  |  ____|  __ \( )/ ____|      | | |  | |_   _/ ____|  ____| |  _ \ / __ \ \ / /
+    | |  | |__| | |__    | |  __   /  \  | \  / | |__  | |__) |/| (___        | | |  | | | || |    | |__    | |_) | |  | \ V / 
+    | |  |  __  |  __|   | | |_ | / /\ \ | |\/| |  __| |  _  /   \___ \   _   | | |  | | | || |    |  __|   |  _ <| |  | |> <  
+    | |  | |  | | |____  | |__| |/ ____ \| |  | | |____| | \ \   ____) | | |__| | |__| |_| || |____| |____  | |_) | |__| / . \ 
+    |_|  |_|  |_|______|  \_____/_/    \_\_|  |_|______|_|  \_\ |_____/   \____/ \____/|_____\_____|______| |____/ \____/_/ \_\
+
+===========================
+###TESTING DOCUMENTATION###
+===========================
+
+commentGame.js
+Creates new account and leaves a comment on a game.
+
+commentJSInjection.js
+Creates a new account and leaves a comment with javascript code then refreshes to see if the injected javascript code runs.
+
+game.js
+Goes to the browse page, clicks a game and checks to see if data is displated correctly.
+
+LoginSQLinject.js
+Creates a dummy account then goes to login page to try and inject SQL code to log into the dummy account without a password.
+
+registerLogin.js
+Creates an account and logs in.
+
+SearchBufferoverflow.js
+Test created to attempt a buffer overflow on the search box which was later found out to not be feasible because a javascript variables are very large.
+
+SearchCodeInject.js
+Tries to inject javascript code in the search box of the browse page.
+
+sortFilterSearch.js
+Tests the functionality of the sort, filter, and search functions on the browse page.
+
+traverseSite.js
+Traverses the site with every 
+
+LoginToRegistration.js
+Displays a bug where after typing log in infromation in then clicking 'dont have an account' causes log in info to be displayed in plain text on the regisration page.
+
+SortThenUnsort.js
+Displays a bug where if a sort is selected then deselected the display does not reset to default.
