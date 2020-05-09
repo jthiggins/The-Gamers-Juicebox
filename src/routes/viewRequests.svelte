@@ -11,7 +11,7 @@
 <script>
     export let session;
     export let requests;
-    import viewRequestDisplay from '../components/viewRequestDisplay.svelte';
+    import ViewRequestDisplay from '../components/ViewRequestDisplay.svelte';
     let error;
     let newrequestText = "";
     function showError(errorMessage) {
@@ -85,7 +85,7 @@
     <h1>Requests</h1>
     {#each requests as request}
     <div style="border: 1px solid black;">
-        <viewRequestDisplay {request} style="margin-right: 10px; margin-bottom: 10px;" />
+        <ViewRequestDisplay {request} style="margin-right: 10px; margin-bottom: 10px;" />
         <form>
             <button on:click={e => {e.preventDefault(); approveRequest(request);}}>Approve</button>
             <button on:click={e => {e.preventDefault(); declineRequest(request);}}>Decline</button>
