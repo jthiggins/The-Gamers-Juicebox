@@ -2,9 +2,17 @@
     <title>Home - The Gamer's Juicebox</title>
 </svelte:head>
 
+<script context="module">
+    export async function preload(page, session) {
+        const gamesFetch = await this.fetch('/indexGames');
+        const games = await gamesFetch.json();
+        return { games };
+    }
+</script>
+
 <script>
     import GameDisplay from '../components/GameDisplay.svelte';
-    let games = Array(5);
+    export let games;
 </script>
 
 <style>

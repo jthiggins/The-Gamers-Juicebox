@@ -332,6 +332,7 @@ CREATE PROCEDURE spGetAllGames
 
 AS BEGIN
 	SELECT
+		gameId,
 		title,
 		price,
 		description,
@@ -441,7 +442,8 @@ AS BEGIN
 	   EXISTS (SELECT NULL FROM Users WHERE userId = @userId AND isAdmin = 1)BEGIN
 		UPDATE GameRequests
 		SET isPending = 0,
-			isAccepted = 0
+			isAccepted = 0,
+			isDeleted = 1
 		WHERE gameRequestId = @gameRequestId
 
 		SELECT 'Request declined' AS [message]
@@ -527,5 +529,23 @@ AS BEGIN
 	FROM Comments c
 		JOIN Users u ON u.userId = c.userId
 	WHERE c.isDeleted = 0
+END
+GO
+
+CREATE PROCEDURE spGetFirstFiveGames
+
+AS BEGIN
+	SELECT TOP(5)
+		gameId,
+		title,
+		price,
+		description,
+		platform,
+		publisher,
+		genre,
+		imgSrc,
+		purchaseLink
+	FROM Games
+	WHERE isDeleted = 0
 END
 GO

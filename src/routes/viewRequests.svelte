@@ -1,6 +1,6 @@
 <script context="module">
     export async function preload(page, session) {
-        const requests = await this.fetch(`/viewRequests.json`).then(res => res.json());
+        const requests = await this.fetch('/requestsView').then(res => res.json());
         return {
             requests,
             session
@@ -9,29 +9,38 @@
 </script>
 
 <script>
-    import viewRequestDisplay from '../../components/viewRequestDisplay.svelte';
+    export let session;
     export let requests;
+    import viewRequestDisplay from '../components/viewRequestDisplay.svelte';
     let error;
     let newrequestText = "";
     function showError(errorMessage) {
         error.innerText = String(errorMessage);
         error.style.display = "block";
     }
-    async function approveRequest() {
+    async function approveRequest(request) {
         try {
-            const res = await fetch('/requests', {
+            const res = await fetch('/viewRequests', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    requestId: gameRequests.gameRequestId,
+                    requestId: request.gameRequestId,
+                    title: request.title,
+                    price: request.price,
+                    platform: request.platform,
+                    description: request.description,
+                    publisher: request.publisher,
+                    genre: request.genre,
+                    imgSrc: request.imgSrc,
+                    userId: session.user,
                     isAccepted: 1
                 })
             });
             if (res.ok) {
                 newrequestText = "";
-                requests = await fetch(`/viewRequests.json`).then(res => res.json());
+                window.location.href = "/viewRequests";
             } else {
                 showError(await res.text());
             }
@@ -39,21 +48,22 @@
             showError(err);
         }
     }
-    async function declineRequest() {
+    async function declineRequest(request) {
         try {
-            const res = await fetch('/requests', {
+            const res = await fetch('/viewRequests', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    requestId: gameRequests.gameRequestId,
-                    isDeleted: 1
+                    requestId: request.gameRequestId,
+                    userId: session.user,
+                    isAccepted: 0
                 })
             });
             if (res.ok) {
                 newrequestText = "";
-                requests = await fetch(`/viewRequests.json`).then(res => res.json());
+                window.location.href = "/viewRequests";
             } else {
                 showError(await res.text());
             }
@@ -74,10 +84,13 @@
 
     <h1>Requests</h1>
     {#each requests as request}
-        <requestDisplay {request} />
+    <div style="border: 1px solid black;">
+        <viewRequestDisplay {request} style="margin-right: 10px; margin-bottom: 10px;" />
+        <form>
+            <button on:click={e => {e.preventDefault(); approveRequest(request);}}>Approve</button>
+            <button on:click={e => {e.preventDefault(); declineRequest(request);}}>Decline</button>
+        </form>
+    </div>
     {/each}
-    <form>
-    	<textarea bind:value={newrequestText}></textarea>
-    	<button on:click={e => {e.preventDefault(); approveRequest();}}>Approve</button>
-    	<button on:click={e => {e.preventDefault(); declineRequest();}}>Decline</button>
-    </form>
+
+

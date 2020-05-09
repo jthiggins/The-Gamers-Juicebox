@@ -5,24 +5,37 @@
 </script>
 
 <style>
-    #container {
-        border: 1px solid black;
-    }
-    #deleteComment {
-        cursor: pointer;
-        color: blue;
-    }
+
+
 </style>
 
-<div id="container">
+
     {#if request}
-        <p>{request.requestDate}</p>
-        <p>{request.title}</p>
-	<p>{request.platform}</p>
-	<p>{request.publisher}</p>
-	<p>{request.genre}</p>
-	<p>{request.imgSrc}</p>
-        <p id="acceptRequest" on:click={acceptRequest(request)}>Accept Request</p>
-        <p id="declineRequest" on:click={declineRequest(request)}>Decline Request</p>
+        <div id="container">
+            <div>
+                <p><strong>Date Requested: </strong>{new Date(request.requestDate).toLocaleDateString()}</p>
+            </div>
+            <div>
+                <p><strong>Game Title: </strong>{request.title}</p>
+            </div>
+            <div>
+                <p><strong>Price: </strong>{request.price}</p>
+            </div>
+            <div>
+                <p><strong>Description: </strong>{request.description}</p>
+            </div>
+            <div>
+                <p><strong>Platform: </strong>{request.platform}</p>
+            </div>
+            <div>
+                <p><strong>Publisher: </strong>{request.publisher}</p>
+            </div>
+            <div>
+                <p><strong>Genre: </strong>{request.genre}</p>
+            </div>
+            <div>
+                <p><strong>Image Source: </strong>{request.imgSrc}</p>
+            </div>
+        </div>
     {/if}
-</div>
+
