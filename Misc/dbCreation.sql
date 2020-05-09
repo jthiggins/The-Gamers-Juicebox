@@ -549,3 +549,33 @@ AS BEGIN
 	WHERE isDeleted = 0
 END
 GO
+
+INSERT INTO Users(firstName, lastName, userName, email, password)
+VALUES ('test', 'user', 'test', 'user@yahoo.com', dbo.fnEncrypt('testuser'))
+GO
+INSERT INTO Users(firstName, lastName, userName, email, password, isAdmin)
+VALUES ('admin', 'admin', 'administrator', 'admin@gmail.com', dbo.fnEncrypt('admin'), 1)
+GO
+INSERT INTO Users(firstName, lastName, userName, email, password, isModerator)
+VALUES ('mod', 'erator', 'mod', 'mod@outlook.com', dbo.fnEncrypt('mod'), 1)
+GO
+
+INSERT INTO Games(title, description, publisher, platform, price, imgSrc, genre)
+VALUES
+	('The Legend of Zelda', 'Explore the world freely by collecting multipurpose items to aid in objectives or solving puzzles and side quests for rewards',
+		'Nintendo', 'Nintendo Switch', 59.99, 'https://static.bhphoto.com/images/images2500x2500/1484750876_1311612.jpg', 'Action-adventure'),
+	('Call of Duty', 'Follow a CIA officer and British SAS forces as they team up with rebels from Urzikstan, against Russian forces who have invaded the country',
+		'Activision', 'PlayStation', 59.99, 'https://static.bhphoto.com/images/images500x500/1560506740_1485444.jpg', 'First-person shooter'),
+	('Super Mario Odyssey', 'Join Mario on a massive, globe-trotting 3D adventure',
+		'Nintendo', 'Nintendo Switch', 49.99, 'https://static.bhphoto.com/images/images500x500/1502105731_1352884.jpg', 'Platform, Action-adventure'),
+	('Fortnite', 'The Agency is calling, will you join the fight?',
+		'Epic Games', 'PlayStation', 58.99, 'https://images-na.ssl-images-amazon.com/images/I/917JLu3S8DL._SL1500_.jpg', 'Survival, Battle royale, Sandbox'),
+	('FIFA 20', 'Authentic soccer experience',
+		'Electronic Arts', 'PlayStation', 39.99, 'https://www.fifaultimateteam.it/en/wp-content/uploads/2019/06/cover_provvisoria_fifa_20-1.png', 'Sports'),
+	('Donkey Kong', 'Arctic invaders have turned Donkey Kong Island into their personal frozen fortress, and it’s up to you to save the day',
+		'Nintendo', 'Nintendo Switch', 59.99, 'https://static.bhphoto.com/images/images500x500/1517923295_1386144.jpg', 'Platform'),
+	('Minecraft', 'Explore a blocky, procedurally-generated 3D world',
+		'Mojang', 'XBox', 19.99, 'https://images-na.ssl-images-amazon.com/images/I/816UaLYI%2BpL._SL1500_.jpg', 'Sandbox, Survival'),
+	('Grand Theft Auto V', 'Follow criminals and their efforts to commit heists while under pressure from a government agency',
+		'Rockstar Games', 'XBox', 9.99, 'https://images-na.ssl-images-amazon.com/images/I/71w79DdTz2L._SL1057_.jpg', 'Action-adventure')
+
