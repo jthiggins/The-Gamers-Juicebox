@@ -7,7 +7,6 @@ export async function get(req, res, next) {
         for (const request of result.recordset) {
             requests.push(request);
         }
-        console.log(requests);
         res.json(requests);
     } catch (err) {
         console.error(err);
